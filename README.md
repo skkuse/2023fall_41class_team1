@@ -8,8 +8,8 @@
 4. 실행후, 브라우저에서 localhost:8000 접속해서 {"status":200,"message":"hello from server"} 문구 확인하면 성공
 
 ## Frontend
-1. 명령 프롬프트(cmd)에서 프로젝트의 /frontend 폴더로 이동
-2. node.js설치 / 최신 LTS 버전: 18.18.0 (includes npm 9.8.1) https://nodejs.org/ko/download
+1. node.js설치 / 최신 LTS 버전: 18.18.0 (includes npm 9.8.1) https://nodejs.org/ko/download
+2. 명령 프롬프트(cmd)에서 프로젝트의 /frontend 폴더로 이동
 3. npm install
 4. npm start (추가로 설치가 필요한 패키지가 있다면 npm install [패키지이름] 으로 설치해주세요 뭐 설치해야됐는지 잘 기억이 안나네요..)
 5. 실행된 화면에서 hello from server 문구 확인하면 성공
