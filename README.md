@@ -4,7 +4,7 @@
 1. 명령 프롬프트(cmd)에서 프로젝트의 /backend 폴더로 이동
 2. pip install fastapi uvicorn
 3. uvicorn --reload --port=8000 --host=0.0.0.0
-4. Error: Missing argument 'APP'. 발생한 경우 uvicorn main.py:app 으로 실행.
+4. Error: Missing argument 'APP'. 발생한 경우 uvicorn main:app 으로 실행.
 4. 실행후, 브라우저에서 localhost:8000 접속해서 {"status":200,"message":"hello from server"} 문구 확인하면 성공
 
 ## Frontend
