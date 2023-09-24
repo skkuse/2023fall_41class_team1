@@ -30,6 +30,7 @@ npm start
 npm install [패키지이름]
 ```
 으로 설치해주세요
+
 5. 실행된 화면에서 hello from server 문구 확인하면 성공
 
 ## Contributing
