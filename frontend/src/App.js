@@ -49,8 +49,8 @@ function App() {
         return response.json();
       })
       .then((response) => {
-        console.log(response.server_info['State']);
-        setMessage(response.output);
+        console.log(response);
+        setMessage(response.output.stdout);
         setServerInfo(response.server_info)
       })
       .catch((error) => console.error("Error:", error));

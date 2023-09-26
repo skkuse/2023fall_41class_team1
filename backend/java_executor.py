@@ -1,25 +1,32 @@
 import subprocess
 import os
+import re
+import time
 
 def execute_java_code(java_code: str):
     try:
-        with open('TempJava.java', 'w') as file:
-            file.write(java_code)
+        # 클래스 이름 추출
+        match = re.search(r'public\s+class\s+(\w+)', java_code)
         
-        compile_process = subprocess.run(['javac', 'TempJava.java'], capture_output=True, text=True)
-        if compile_process.returncode != 0:
-            return {"status": "Compilation Error!", "error": compile_process.stderr}
-        
-        run_process = subprocess.run(['java', 'TempJava'], capture_output=True, text=True)
-        if run_process.returncode == 0:
-            output = run_process.stdout
-        else:
-            return {"status": "Runtime Error!", "error": run_process.stderr}
+        class_name = match.group(1)
+        file_name = f"{class_name}.java"
 
-        os.remove('TempJava.java')
-        os.remove('TempJava.class')
-        
-        return {"status": "Success", "output": output}
+        with open(file_name, 'w') as file:
+            file.write(java_code)
+
+        # class파일 생성
+        subprocess.run(['javac', file_name], capture_output=True, text=True)
+
+        start_time = time.time()
+        result = subprocess.run(['java', file_name], capture_output=True, text=True)
+        end_time = time.time()
+        runtime = end_time-start_time
+
+        # .class파일과 .java파일 모두 삭제
+        os.remove(file_name)
+        os.remove(f"{class_name}.class")
+
+        return {"status": "Success", "output": result,"runtime":runtime}
 
     except Exception as e:
         return {"status": "Failed", "error": str(e)}
