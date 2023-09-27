@@ -1,0 +1,136 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  /* background-color: #E3CEF6; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+* {  
+  margin:0;  /* 브라우저 기본 마진 리셋 */
+  padding:0;  /* 브라우저 기본 패딩 리셋 */
+  box-sizing: border-box;  /* 테두리까지 포함해서 박스 모델 너비로 계산 */
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(Ubuntu-Medium.ttf);
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url(Roboto-Light.ttf);
+}
+
+body {
+  background-image: url(background3.jpg);
+  background-size: contain;
+}
+
+#container {
+  width: 1200px;
+  margin: 20px auto;
+}
+
+#title {
+  color: black;
+  font-family: 'Ubuntu';
+  font-size: 35px;
+  background-color: white;
+  background-color: rgba( 255, 255, 255, 0.7 );
+  border: 2px solid black;
+  border-radius: 20px;
+  line-height: 100px;
+  margin: 10px auto;
+  width: 100%;
+  height: 100px;
+}
+
+#input_code {
+  color: black;
+  font-family: 'Ubuntu';
+  background-color: white;
+  background-color: rgba( 255, 255, 255, 0.7 );
+  border: 2px solid black;
+  border-radius: 20px;
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+  height: 300px;
+}
+
+#textbox {
+	padding: 10px;
+	border: solid 2px darkblue;
+	border-radius: 10px;
+	font-size: 15px;
+  font-family: 'Roboto';
+}
+
+#server {
+  font-family: 'Ubuntu';
+  background-color: white;
+  background-color: rgba( 255, 255, 255, 0.7 );
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  margin-right: 5px;
+  width: 495px;
+  height: 700px;
+  color: black;
+  text-align: left;
+  float:left;
+}
+
+#detail {
+  font-size: 15px;
+}
+
+#server_info {
+  color: black;
+}
+
+#information {
+  font-family: 'Ubuntu';
+  color: black;
+  background-color: white;
+  background-color: rgba( 255, 255, 255, 0.7 );
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  margin-left: 5px;
+  width: 695px;
+  height: 700px;
+  float:right;
+}
