@@ -56,6 +56,10 @@
 body {
   background-image: url(background3.jpg);
   background-size: contain;
+
+  animation-duration: 0.5s;
+  animation-name: slide_up;
+  animation-iteration-count:initial;
 }
 
 #container {
@@ -133,4 +137,15 @@ body {
   width: 695px;
   height: 700px;
   float:right;
+}
+
+/* page loading animation */
+@keyframes slide_up {
+  from {
+      transform: translateY(-100%); 
+    }
+  
+    to {
+      transform: translateY(0%);
+    }
 }
