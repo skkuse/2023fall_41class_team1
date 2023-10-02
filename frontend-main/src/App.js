@@ -100,7 +100,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
         <div id="container">
 
           <div id="title">
@@ -121,23 +121,23 @@ function App() {
           <div id="server">
           <strong id="server_info">Server Information</strong><br/><br/>
            <div id="detail">
-           execution result<br/>
+           <p>execution result</p>
            <Item>{message}</Item>
-           Total memory<br/>
+           <p>Total memory</p>
            <Item>{serverInfo['Total memory']}</Item>
-           Available memory<br/>
+           <p>Available memory</p>
            <Item>{serverInfo['Available memory']}</Item>
-           Total CPU cores (including logical)<br/>
+           <p>Total CPU cores (including logical)</p>
            <Item>{serverInfo['Total CPU cores (including logical)']}</Item>
-           Maximum CPU frequency<br/>
+           <p>Maximum CPU frequency</p>
            <Item>{serverInfo['Maximum CPU frequency']}</Item>
-           Physical CPU cores<br/>
+           <p>Physical CPU cores</p>
            <Item>{serverInfo['Physical CPU cores']}</Item>
-           Country<br/>
+           <p>Country</p>
            <Item>{serverInfo['Country']}</Item>
-           City<br/>
+           <p>City</p>
            <Item>{serverInfo['City']}</Item>
-           State<br/>
+           <p>State</p>
            <Item>{serverInfo['State']}</Item>
            </div>
           </div>

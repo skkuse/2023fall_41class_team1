@@ -1,40 +1,6 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  /* background-color: #E3CEF6; */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  font-size: 16px; /* 추후 Website의 Accessibility를 위해 root font size 지정 */
 }
 
 * {  
@@ -57,7 +23,8 @@ body {
   background-image: url(background3.jpg);
   background-size: contain;
 
-  animation-duration: 0.5s;
+  /* 페이지 로딩 애니메이션 추가 */
+  animation-duration: 1s;
   animation-name: slide_up;
   animation-iteration-count:initial;
 }
@@ -92,6 +59,7 @@ body {
   padding: 10px;
   width: 100%;
   height: 300px;
+  font-size: 25px;
 }
 
 #textbox {
@@ -113,16 +81,17 @@ body {
   width: 495px;
   height: 700px;
   color: black;
-  text-align: left;
+  text-align: center;
   float:left;
-}
-
-#detail {
-  font-size: 15px;
 }
 
 #server_info {
   color: black;
+  font-size: 25px;
+}
+
+#detail {
+  font-size: 20px;
 }
 
 #information {
@@ -137,6 +106,11 @@ body {
   width: 695px;
   height: 700px;
   float:right;
+  font-size: 25px;
+}
+
+p {
+  margin: 0.7rem; /* server info 부분 content 간 간격 넓힘 */
 }
 
 /* page loading animation */
