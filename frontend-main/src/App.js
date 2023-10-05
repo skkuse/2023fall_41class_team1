@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
-
+import Editor from '@monaco-editor/react'
 
 // interface serverInfoI {
 //   "Available memory": string;
@@ -19,10 +19,10 @@ import PropTypes from 'prop-types';
 function App() {
   var message1 = "hello";
   const [javaCode ,setJavaCode]= useState(`public class TempJava {
-    public static void main(String[] args) {
-        System.out.println("Hello from Java!");
-      }
-    }`)
+  public static void main(String[] args) {
+      System.out.println("Hello from Java!");
+  }
+}`)
   const [message, setMessage] = useState("");
   const [serverInfo, setServerInfo] = useState( {
     "Available memory": "",
@@ -109,12 +109,13 @@ function App() {
 
           <div id="input_code">
            <strong>Enter Code</strong><br/><br/>
-           <textarea id="textbox"
+           <Editor height="180px" defaultLanguage="java" defaultValue={javaCode} />
+           {/*<textarea id="textbox"
            value={javaCode}
            onChange={onInputChange}
            rows="4"
            cols="50"
-           style={{width: '80%', height: '50%', overflow: 'auto' }}/><br/>
+           style={{width: '80%', height: '50%', overflow: 'auto' }}/><br/>*/}
            <Button variant="outlined" onClick= {onExecute}>Compile</Button>
           </div>
 
