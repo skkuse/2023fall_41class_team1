@@ -20,7 +20,7 @@
 }
 
 body {
-  background-image: url(background3.jpg);
+  background-image: url(/src/assets/images/background3.jpg);
   background-size: contain;
 
   /* 페이지 로딩 애니메이션 추가 */
@@ -109,9 +109,7 @@ body {
   font-size: 25px;
 }
 
-p {
-  margin: 0.7rem; /* server info 부분 content 간 간격 넓힘 */
-}
+
 
 /* page loading animation */
 @keyframes slide_up {
