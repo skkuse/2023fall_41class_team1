@@ -1,10 +1,14 @@
 import psutil
 import geocoder
+import cpuinfo
 
-giga = 1024*1024*1024
+GIGA = 1024*1024*1024
 
 def get_system_info():
-    cpu_info = psutil.cpu_count(logical=False)
+
+
+    cpu_name = cpuinfo.get_cpu_info()['brand_raw']
+    cpu_core_num = cpuinfo.get_cpu_info()['count']
     cpu_logical = psutil.cpu_count(logical=True)
     cpu_freq = psutil.cpu_freq().max
     memory_info = psutil.virtual_memory()
@@ -12,11 +16,12 @@ def get_system_info():
     g = geocoder.ip('me')
 
     return {
-        "Physical CPU cores": cpu_info,
+        "Processor name" : cpu_name,
+        "Physical CPU cores": cpu_core_num,
         "Total CPU cores (including logical)": cpu_logical,
         "Maximum CPU frequency": cpu_freq,
-        "Total memory": str(memory_info.total / giga) + "GB",
-        "Available memory": str(memory_info.available / giga) + "GB",
+        "Total memory": (memory_info.total / GIGA),
+        "Available memory":(memory_info.available / GIGA),
         "City": g.city,
         "State": g.state,
         "Country": g.country
