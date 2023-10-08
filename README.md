@@ -1,5 +1,7 @@
 # SWE_Project
 
+## Getting Started
+
 ### Frontend
 1. node.js설치 / 최신 LTS 버전: 18.18.0 (includes npm 9.8.1) https://nodejs.org/ko/download
 2. 명령 프롬프트(cmd)에서 프로젝트의 /frontend 폴더로 이동
