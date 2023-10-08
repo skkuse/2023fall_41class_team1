@@ -6,7 +6,7 @@ import ServerInfoItem from "components/ServerInfoItem";
 import MultiTabInput from "components/MultiTabInput";
 
 function App() {
-  const [tabs, setTabs] = useState([{ id: 1, javaCode: '' }]);
+  const [tabs, setTabs] = useState([{ id: 1, javaCode: "" }]);
 
   // const [javaCode, setJavaCode] = useState(`public class TempJava {
   //   public static void main(String[] args) {
@@ -25,16 +25,16 @@ function App() {
     "Total memory": "",
   });
 
-  const handleTabsChange = (newTabs)=>{
-    setTabs(newTabs)
-  }
+  const handleTabsChange = (newTabs) => {
+    setTabs(newTabs);
+  };
 
   // const onInputChange = (e) => {
   //   setJavaCode(e.target.value);
   // };
 
   const parseTabsToJson = () => {
-    var idx =1
+    var idx = 1;
     const java_codes = tabs.reduce((acc, tab) => {
       const codeKey = `code${idx}`;
       acc[codeKey] = tab.javaCode;
@@ -66,7 +66,6 @@ function App() {
       .catch((error) => console.error("Error:", error));
   };
 
-
   <link
     href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap"
     rel="stylesheet"
@@ -84,16 +83,10 @@ function App() {
             <strong>Enter Code</strong>
             <br />
             <br />
-            <MultiTabInput tabs={tabs} handleTabsChange={handleTabsChange} ></MultiTabInput>
-            {/* <textarea
-              id="textbox"
-              value={javaCode}
-              onChange={onInputChange}
-              rows="4"
-              cols="50"
-              style={{ width: "80%", height: "50%", overflow: "auto" }}
-            /> */}
-            <br />
+            <MultiTabInput
+              tabs={tabs}
+              handleTabsChange={handleTabsChange}
+            ></MultiTabInput>
             <Button variant="outlined" onClick={onExecute}>
               Compile
             </Button>
@@ -111,11 +104,17 @@ function App() {
               <p>Available memory</p>
               <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
               <p>Total CPU cores (including logical)</p>
-              <ServerInfoItem>{serverInfo["Total CPU cores (including logical)"]}</ServerInfoItem>
+              <ServerInfoItem>
+                {serverInfo["Total CPU cores (including logical)"]}
+              </ServerInfoItem>
               <p>Maximum CPU frequency</p>
-              <ServerInfoItem>{serverInfo["Maximum CPU frequency"]}</ServerInfoItem>
+              <ServerInfoItem>
+                {serverInfo["Maximum CPU frequency"]}
+              </ServerInfoItem>
               <p>Physical CPU cores</p>
-              <ServerInfoItem>{serverInfo["Physical CPU cores"]}</ServerInfoItem>
+              <ServerInfoItem>
+                {serverInfo["Physical CPU cores"]}
+              </ServerInfoItem>
               <p>Country</p>
               <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
               <p>City</p>
