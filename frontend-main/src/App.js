@@ -87,6 +87,8 @@ function App() {
               tabs={tabs}
               handleTabsChange={handleTabsChange}
             ></MultiTabInput>
+            <br />
+            <br />
             <Button variant="outlined" onClick={onExecute}>
               Compile
             </Button>

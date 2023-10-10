@@ -58,17 +58,17 @@ body {
   margin: 10px auto;
   padding: 10px;
   width: 100%;
-  height: 300px;
+  height: 500px;
   font-size: 25px;
 }
 
-#textbox {
+/* #textbox {
 	padding: 10px;
 	border: solid 2px darkblue;
 	border-radius: 10px;
 	font-size: 15px;
   font-family: 'Roboto';
-}
+} */
 
 #server {
   font-family: 'Ubuntu';

@@ -47,6 +47,8 @@ function MultiTabInput(props) {
         ))}
         <button onClick={addTab}>+ Add Tab</button>
       </div>
+
+
       <div className="input-container">
         {props.tabs.map(
           (tab) =>
@@ -56,7 +58,7 @@ function MultiTabInput(props) {
                 defaultLanguage="java"
                 value={tab.javaCode}
                 onChange={(value, event) => handleEditorChange(tab.id, value)}
-                height="10vh"
+                height="30vh"
               ></Editor>
             )
         )}
