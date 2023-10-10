@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./MultiTabInput.css";
 import Editor from "@monaco-editor/react";
 
 function MultiTabInput(props) {
+
+  const tabsRef = useRef(null);
+
+  const scrollLeft = () => {
+    tabsRef.current.scrollLeft -= 100;
+  };
+
+  const scrollRight = () => {
+    tabsRef.current.scrollLeft += 100;
+  };
+
   const [activeTab, setActiveTab] = useState(1);
 
   const addTab = () => {
@@ -20,6 +31,7 @@ function MultiTabInput(props) {
     if (updatedTabs.length > 0) {
       setActiveTab(updatedTabs[0].id);
     }
+
   };
 
 
@@ -34,18 +46,22 @@ function MultiTabInput(props) {
 
   return (
     <div className="multi-tab-input">
-      <div className="tabs">
-        {props.tabs.map((tab) => (
-          <div
-            key={tab.id}
-            className={`tab ${activeTab === tab.id ? "active" : ""}`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            Tab {tab.id}
-            <button onClick={() => deleteTab(tab.id)}>X</button>
-          </div>
-        ))}
-        <button onClick={addTab}>+ Add Tab</button>
+      <div className="tabs-container">
+        <button onClick={scrollLeft}>&lt;</button>
+        <div className="tabs" ref={tabsRef}>
+          {props.tabs.map((tab) => (
+            <div
+              key={tab.id}
+              className={`tab ${activeTab === tab.id ? "active" : ""}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              Tab {tab.id}
+              <button onClick={() => deleteTab(tab.id)}>X</button>
+            </div>
+          ))}
+          <button onClick={addTab}>+ Add Tab</button>
+        </div>
+        <button onClick={scrollRight}>&gt;</button>
       </div>
 
 

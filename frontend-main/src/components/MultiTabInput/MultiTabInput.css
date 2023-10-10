@@ -3,12 +3,31 @@
     height: 20rem;
 }
 
+.tabs-container {
+    display: flex;
+    align-items: center;
+}
+
+.tabs-container > button {
+    border: none;  /* border 제거 */
+    font-size: 1rem;
+}
+
+.tabs-container > button:hover {
+    color: aliceblue;
+}
+
 .tabs {
     display: flex;
     padding: 10px;
     background-color: transparent;
     border-radius: 2rem;
-    border: 0.2rem solid rgb(131, 120, 237);
+    border: 0.15rem solid rgb(131, 120, 237);
+
+    flex: 1;
+    display: flex;
+    overflow-x: hidden; /* 수평 스크롤바 숨김 */
+    white-space: nowrap; /* 탭들을 한 줄로 표시 */
 }
 
 .tab {
@@ -23,10 +42,12 @@
 .tab.active {
     background-color: rgb(131, 120, 237);
     border-bottom-color: transparent;
+    color: aliceblue;
 }
 
 .tab:hover {
     background-color: rgb(131, 120, 237);
+    color: aliceblue;
 }
 
 
