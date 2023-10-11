@@ -27,6 +27,12 @@ function MultiTabInput(props) {
 
   const deleteTab = (id) => {
     const updatedTabs = props.tabs.filter((tab) => tab.id !== id);
+
+    // Prevent zero tabs
+    if (updatedTabs.length < 1) {
+      return;
+    }
+
     props.handleTabsChange(updatedTabs);
     if (updatedTabs.length > 0) {
       setActiveTab(updatedTabs[0].id);
@@ -74,7 +80,7 @@ function MultiTabInput(props) {
                 defaultLanguage="java"
                 value={tab.javaCode}
                 onChange={(value, event) => handleEditorChange(tab.id, value)}
-                height="30vh"
+                height="40vh"
               ></Editor>
             )
         )}

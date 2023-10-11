@@ -76,58 +76,54 @@ function App() {
       <header>
         <div id="container">
           <div id="title">
-            <strong>Green Algorithm</strong>
+            Green Algorithms
           </div>
 
           <div id="input_code">
-            <strong>Enter Code</strong>
-            <br />
-            <br />
+            <p>Enter Code</p>
             <MultiTabInput
               tabs={tabs}
               handleTabsChange={handleTabsChange}
             ></MultiTabInput>
-            <br />
-            <br />
             <Button variant="outlined" onClick={onExecute}>
               Compile
             </Button>
           </div>
 
-          <div id="server">
-            <strong id="server_info">Server Information</strong>
-            <br />
-            <br />
-            <div id="detail">
-              <p>execution result</p>
-              <ServerInfoItem>{message}</ServerInfoItem>
-              <p>Total memory</p>
-              <ServerInfoItem>{serverInfo["Total memory"]}</ServerInfoItem>
-              <p>Available memory</p>
-              <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
-              <p>Total CPU cores (including logical)</p>
-              <ServerInfoItem>
-                {serverInfo["Total CPU cores (including logical)"]}
-              </ServerInfoItem>
-              <p>Maximum CPU frequency</p>
-              <ServerInfoItem>
-                {serverInfo["Maximum CPU frequency"]}
-              </ServerInfoItem>
-              <p>Physical CPU cores</p>
-              <ServerInfoItem>
-                {serverInfo["Physical CPU cores"]}
-              </ServerInfoItem>
-              <p>Country</p>
-              <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
-              <p>City</p>
-              <ServerInfoItem>{serverInfo["City"]}</ServerInfoItem>
-              <p>State</p>
-              <ServerInfoItem>{serverInfo["State"]}</ServerInfoItem>
+          <div class="rowflex">
+            <div class="colelem-2" id="server">
+              <p id="server_info">Server Information</p>
+              <div id="detail">
+                <p>execution result</p>
+                <ServerInfoItem>{message}</ServerInfoItem>
+                <p>Total memory</p>
+                <ServerInfoItem>{serverInfo["Total memory"]}</ServerInfoItem>
+                <p>Available memory</p>
+                <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
+                <p>Total CPU cores (including logical)</p>
+                <ServerInfoItem>
+                  {serverInfo["Total CPU cores (including logical)"]}
+                </ServerInfoItem>
+                <p>Maximum CPU frequency</p>
+                <ServerInfoItem>
+                  {serverInfo["Maximum CPU frequency"]}
+                </ServerInfoItem>
+                <p>Physical CPU cores</p>
+                <ServerInfoItem>
+                  {serverInfo["Physical CPU cores"]}
+                </ServerInfoItem>
+                <p>Country</p>
+                <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
+                <p>City</p>
+                <ServerInfoItem>{serverInfo["City"]}</ServerInfoItem>
+                <p>State</p>
+                <ServerInfoItem>{serverInfo["State"]}</ServerInfoItem>
+              </div>
             </div>
-          </div>
-
-          <div id="information">
-            <strong>Information</strong>
+            <div class="colelem-3 colflex" id="information">
+              <p>Server Message</p>
+              <textarea id="server_message" readOnly></textarea>
+            </div>
           </div>
         </div>
       </header>
