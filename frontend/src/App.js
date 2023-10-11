@@ -73,60 +73,58 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <div id="container">
-          <div id="title">
-            Green Algorithms
-          </div>
+      <div id="container">
+        <header id="title">
+          Green Algorithms
+        </header>
 
-          <div id="input_code">
-            <p>Enter Code</p>
-            <MultiTabInput
-              tabs={tabs}
-              handleTabsChange={handleTabsChange}
-            ></MultiTabInput>
-            <Button class="tab" onClick={onExecute}>
-              Compile
-            </Button>
-          </div>
+        <nav id="input_code">
+          <p>Enter Code</p>
+          <MultiTabInput
+            tabs={tabs}
+            handleTabsChange={handleTabsChange}
+          ></MultiTabInput>
+          <Button class="tab" onClick={onExecute}>
+            Compile
+          </Button>
+        </nav>
 
-          <div class="rowflex">
-            <div class="colelem-2" id="server">
-              <p id="server_info">Server Information</p>
-              <div id="detail">
-                <p>execution result</p>
-                <ServerInfoItem>{message}</ServerInfoItem>
-                <p>Total memory</p>
-                <ServerInfoItem>{serverInfo["Total memory"]}</ServerInfoItem>
-                <p>Available memory</p>
-                <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
-                <p>Total CPU cores (including logical)</p>
-                <ServerInfoItem>
-                  {serverInfo["Total CPU cores (including logical)"]}
-                </ServerInfoItem>
-                <p>Maximum CPU frequency</p>
-                <ServerInfoItem>
-                  {serverInfo["Maximum CPU frequency"]}
-                </ServerInfoItem>
-                <p>Physical CPU cores</p>
-                <ServerInfoItem>
-                  {serverInfo["Physical CPU cores"]}
-                </ServerInfoItem>
-                <p>Country</p>
-                <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
-                <p>City</p>
-                <ServerInfoItem>{serverInfo["City"]}</ServerInfoItem>
-                <p>State</p>
-                <ServerInfoItem>{serverInfo["State"]}</ServerInfoItem>
-              </div>
-            </div>
-            <div class="colelem-3 colflex" id="information">
-              <p>Server Message</p>
-              <textarea id="server_message" readOnly></textarea>
+        <article class="rowflex">
+          <div class="colelem-2" id="server">
+            <p id="server_info">Server Information</p>
+            <div id="detail">
+              <p>execution result</p>
+              <ServerInfoItem>{message}</ServerInfoItem>
+              <p>Total memory</p>
+              <ServerInfoItem>{serverInfo["Total memory"]}</ServerInfoItem>
+              <p>Available memory</p>
+              <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
+              <p>Total CPU cores (including logical)</p>
+              <ServerInfoItem>
+                {serverInfo["Total CPU cores (including logical)"]}
+              </ServerInfoItem>
+              <p>Maximum CPU frequency</p>
+              <ServerInfoItem>
+                {serverInfo["Maximum CPU frequency"]}
+              </ServerInfoItem>
+              <p>Physical CPU cores</p>
+              <ServerInfoItem>
+                {serverInfo["Physical CPU cores"]}
+              </ServerInfoItem>
+              <p>Country</p>
+              <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
+              <p>City</p>
+              <ServerInfoItem>{serverInfo["City"]}</ServerInfoItem>
+              <p>State</p>
+              <ServerInfoItem>{serverInfo["State"]}</ServerInfoItem>
             </div>
           </div>
-        </div>
-      </header>
+          <div class="colelem-3 colflex" id="information">
+            <p>Server Message</p>
+            <textarea id="server_message" readOnly></textarea>
+          </div>
+        </article>
+      </div>
     </div>
   );
 }
