@@ -49,6 +49,26 @@ body {
   flex-direction: column;
 }
 
+.tab {
+  padding: 10px 20px;
+  border-radius: 2rem;
+  margin-right: 5px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.7s;
+}
+
+.tab.active {
+  background-color: rgb(131, 120, 237);
+  border-bottom-color: transparent;
+  color: aliceblue;
+}
+
+.tab:hover {
+  background-color: rgb(131, 120, 237);
+  color: aliceblue;
+}
+
 #container {
   width: 1200px;
   height: 100%;
