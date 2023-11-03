@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 
 import ServerInfoItem from "components/ServerInfoItem";
 import MultiTabInput from "components/MultiTabInput";
+import Grid from "components/Grid";
 
 function App() {
   const [tabs, setTabs] = useState([{ id: 1, javaCode: "" }]);
@@ -121,7 +122,9 @@ function App() {
           </div>
           <div class="colelem-3 colflex" id="information">
             <p>Server Message</p>
-            <textarea id="server_message" readOnly></textarea>
+            <Grid
+            ></Grid>
+
           </div>
         </article>
       </div>
