@@ -80,7 +80,7 @@ body {
   background-color: rgba( 255, 255, 255, 0.7 );
   border: 2px solid black;
   border-radius: 20px;
-  margin: 10px auto;
+  margin: 10px 5px;
   padding: 10px;
   width: 100%;
   height: 100%;
@@ -90,8 +90,14 @@ body {
   color: green;
 }
 
-#container {
-  width: 1200px;
+#container-narrow {
+  width: 90%;
+  height: 100%;
+  margin: 20px auto;
+}
+
+#container-wide {
+  width: 90%;
   height: 100%;
   margin: 20px auto;
 }

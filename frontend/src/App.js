@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import ServerInfoItem from "components/ServerInfoItem";
 import MultiTabInput from "components/MultiTabInput";
 import Grid from "components/Grid";
+import { useMediaQuery } from "react-responsive";
 
 function App() {
   const [tabs, setTabs] = useState([{ id: 1, javaCode: "" }]);
@@ -25,6 +26,8 @@ function App() {
     "Total CPU cores (including logical)": "",
     "Total memory": "",
   });
+
+  const isBigScreen = useMediaQuery({ query: '(min-width: 1280px)' });
 
   const handleTabsChange = (newTabs) => {
     setTabs(newTabs);
@@ -74,117 +77,235 @@ function App() {
 
   return (
     <div className="App">
-      <div id="container">
-        <header id="title">
-          Green Algorithms
-        </header>
+      {!isBigScreen &&
+        <div id="container-narrow">
+          <header id="title">
+            Green Algorithms
+          </header>
 
-        <nav id="input_code">
-          <p>Enter Code</p>
-          <MultiTabInput
-            tabs={tabs}
-            handleTabsChange={handleTabsChange}
-          ></MultiTabInput>
-          <Button class="tab" onClick={onExecute}>
-            Compile
-          </Button>
-        </nav>
+          <nav id="input_code">
+            <p>Enter Code</p>
+            <MultiTabInput
+              tabs={tabs}
+              handleTabsChange={handleTabsChange}
+            ></MultiTabInput>
+            <Button class="tab" onClick={onExecute}>
+              Compile
+            </Button>
+          </nav>
 
-        <article class="article" id="article-runtime">
-          <p id="server_info">Execution Results</p>
+          <article class="article" id="article-runtime">
+            <p id="server_info">Execution Results</p>
+            <div class="rowflex">
+              <div class="colelem-1">
+                <p>Execution Result</p>
+                <ServerInfoItem>{message}</ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>Elapsed Time</p>
+                <ServerInfoItem>{serverInfo["Elapsed time"]}</ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>Used Memory</p>
+                <ServerInfoItem>{serverInfo["Used memory"]}</ServerInfoItem>
+              </div>
+              <div class="colelem-1 green">
+                <p>Carbon Emission</p>
+                <ServerInfoItem>{serverInfo["Carbon emission"]}</ServerInfoItem>
+              </div>
+            </div>
+          </article>
+
+          <article class="article" id="article-effect">
+            <p id="server_info">It resembles to...</p>
+            <div class="rowflex">
+              <div class="colelem-1">
+                <p>Cars</p>
+                <ServerInfoItem>{serverInfo["Cars"]}</ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>Phones</p>
+                <ServerInfoItem>{serverInfo["Phones"]}</ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>Air Conditioners</p>
+                <ServerInfoItem>{serverInfo["Air conditioners"]}</ServerInfoItem>
+              </div>
+              <div class="colelem-1 green">
+                <p>Trees</p>
+                <ServerInfoItem>{serverInfo["Trees"]}</ServerInfoItem>
+              </div>
+            </div>
+          </article>
+
+          <article class="article" id="article-message">
+            <p id="server_info">Server Message</p>
+            <textarea id="server_message" readOnly></textarea>
+          </article>
+
+          <article class="article" id="article-extra">
+            <p id="server_info">Extra Server Information</p>
+            <div class="rowflex">
+              <div class="colelem-1">
+                <p>Logical CPU Cores</p>
+                <ServerInfoItem>
+                  {serverInfo["Total CPU cores (including logical)"]}
+                </ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>Physical CPU Cores</p>
+                <ServerInfoItem>
+                  {serverInfo["Physical CPU cores"]}
+                </ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>Maximum CPU Frequency</p>
+                <ServerInfoItem>
+                  {serverInfo["Maximum CPU frequency"]}
+                </ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>Total Memory</p>
+                <ServerInfoItem>{serverInfo["Total memory"]}</ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>Available Memory</p>
+                <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
+              </div>
+            </div>
+            <div class="rowflex">
+              <div class="colelem-1">
+                <p>City</p>
+                <ServerInfoItem>{serverInfo["City"]}</ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>State</p>
+                <ServerInfoItem>{serverInfo["State"]}</ServerInfoItem>
+              </div>
+              <div class="colelem-1">
+                <p>Country</p>
+                <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
+              </div>
+            </div>
+          </article>
+        </div>
+      }
+
+      {isBigScreen &&
+        <div id="container-wide">
+          <header id="title">
+            Green Algorithms
+          </header>
+
+          <nav id="input_code">
+            <p>Enter Code</p>
+            <MultiTabInput
+              tabs={tabs}
+              handleTabsChange={handleTabsChange}
+            ></MultiTabInput>
+            <Button class="tab" onClick={onExecute}>
+              Compile
+            </Button>
+          </nav>
+
           <div class="rowflex">
-            <div class="colelem-1">
-              <p>Execution Result</p>
-              <ServerInfoItem>{message}</ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>Elapsed Time</p>
-              <ServerInfoItem>{serverInfo["Elapsed time"]}</ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>Used Memory</p>
-              <ServerInfoItem>{serverInfo["Used memory"]}</ServerInfoItem>
-            </div>
-            <div class="colelem-1 green">
-              <p>Carbon Emission</p>
-              <ServerInfoItem>{serverInfo["Carbon emission"]}</ServerInfoItem>
-            </div>
+            <article class="article colelem-1" id="article-runtime">
+              <p id="server_info">Execution Results</p>
+              <div class="rowflex">
+                <div class="colelem-1">
+                  <p>Execution Result</p>
+                  <ServerInfoItem>{message}</ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>Elapsed Time</p>
+                  <ServerInfoItem>{serverInfo["Elapsed time"]}</ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>Used Memory</p>
+                  <ServerInfoItem>{serverInfo["Used memory"]}</ServerInfoItem>
+                </div>
+                <div class="colelem-1 green">
+                  <p>Carbon Emission</p>
+                  <ServerInfoItem>{serverInfo["Carbon emission"]}</ServerInfoItem>
+                </div>
+              </div>
+            </article>
+            <article class="article colelem-1" id="article-effect">
+              <p id="server_info">It resembles to...</p>
+              <div class="rowflex">
+                <div class="colelem-1">
+                  <p>Cars</p>
+                  <ServerInfoItem>{serverInfo["Cars"]}</ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>Phones</p>
+                  <ServerInfoItem>{serverInfo["Phones"]}</ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>Air Conditioners</p>
+                  <ServerInfoItem>{serverInfo["Air conditioners"]}</ServerInfoItem>
+                </div>
+                <div class="colelem-1 green">
+                  <p>Trees</p>
+                  <ServerInfoItem>{serverInfo["Trees"]}</ServerInfoItem>
+                </div>
+              </div>
+            </article>
           </div>
-        </article>
 
-        <article class="article" id="article-effect">
-          <p id="server_info">It resembles to...</p>
           <div class="rowflex">
-            <div class="colelem-1">
-              <p>Cars</p>
-              <ServerInfoItem>{serverInfo["Cars"]}</ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>Phones</p>
-              <ServerInfoItem>{serverInfo["Phones"]}</ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>Air Conditioners</p>
-              <ServerInfoItem>{serverInfo["Air conditioners"]}</ServerInfoItem>
-            </div>
-            <div class="colelem-1 green">
-              <p>Trees</p>
-              <ServerInfoItem>{serverInfo["Trees"]}</ServerInfoItem>
-            </div>
+              <article class="article colelem-1" id="article-extra">
+              <p id="server_info">Extra Server Information</p>
+              <div class="rowflex">
+                <div class="colelem-1">
+                  <p>Logical CPU Cores</p>
+                  <ServerInfoItem>
+                    {serverInfo["Total CPU cores (including logical)"]}
+                  </ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>Physical CPU Cores</p>
+                  <ServerInfoItem>
+                    {serverInfo["Physical CPU cores"]}
+                  </ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>Maximum CPU Frequency</p>
+                  <ServerInfoItem>
+                    {serverInfo["Maximum CPU frequency"]}
+                  </ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>Total Memory</p>
+                  <ServerInfoItem>{serverInfo["Total memory"]}</ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>Available Memory</p>
+                  <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
+                </div>
+              </div>
+              <div class="rowflex">
+                <div class="colelem-1">
+                  <p>City</p>
+                  <ServerInfoItem>{serverInfo["City"]}</ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>State</p>
+                  <ServerInfoItem>{serverInfo["State"]}</ServerInfoItem>
+                </div>
+                <div class="colelem-1">
+                  <p>Country</p>
+                  <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
+                </div>
+              </div>
+            </article>
+            <article class="article colelem-1" id="article-message">
+              <p id="server_info">Server Message</p>
+              <textarea id="server_message" readOnly></textarea>
+            </article>
           </div>
-        </article>
-
-        <article class="article" id="article-message">
-          <p id="server_info">Server Message</p>
-          <textarea id="server_message" readOnly></textarea>
-        </article>
-
-        <article class="article" id="article-extra">
-          <p id="server_info">Extra Server Information</p>
-          <div class="rowflex">
-            <div class="colelem-1">
-              <p>Logical CPU Cores</p>
-              <ServerInfoItem>
-                {serverInfo["Total CPU cores (including logical)"]}
-              </ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>Physical CPU Cores</p>
-              <ServerInfoItem>
-                {serverInfo["Physical CPU cores"]}
-              </ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>Maximum CPU Frequency</p>
-              <ServerInfoItem>
-                {serverInfo["Maximum CPU frequency"]}
-              </ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>Total Memory</p>
-              <ServerInfoItem>{serverInfo["Total memory"]}</ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>Available Memory</p>
-              <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
-            </div>
-          </div>
-          <div class="rowflex">
-            <div class="colelem-1">
-              <p>City</p>
-              <ServerInfoItem>{serverInfo["City"]}</ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>State</p>
-              <ServerInfoItem>{serverInfo["State"]}</ServerInfoItem>
-            </div>
-            <div class="colelem-1">
-              <p>Country</p>
-              <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
-            </div>
-          </div>
-        </article>
-      </div>
+        </div>
+      }
     </div>
   );
 }
