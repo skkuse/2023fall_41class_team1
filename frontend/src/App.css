@@ -22,7 +22,8 @@
 body {
   height: 100%;
   width: 100%;
-  background: url(/src/assets/images/background3.jpg) no-repeat center fixed;
+  background: url(/src/assets/images/polarbear1.jpg) no-repeat center fixed;
+  /* polarber 0~10 이미지출처 : https://www.shutterstock.com/ko */
   background-size: cover;
 
   /* 페이지 로딩 애니메이션 추가 */
@@ -54,30 +55,33 @@ body {
 }
 
 .tab {
-  padding: 10px 20px;
-  border-radius: 2rem;
+  padding: 5px 20px;
+  border-radius: 1rem;
   margin-right: 5px;
   cursor: pointer;
   display: inline-block;
   transition: background-color 0.7s;
+  font-size: 17px;
+  text-align: center;
 }
 
 .tab.active {
-  background-color: rgb(131, 120, 237);
-  border-bottom-color: transparent;
-  color: aliceblue;
+  background-color: #C0C0C0	;
 }
 
 .tab:hover {
+  /*
   background-color: rgb(131, 120, 237);
   color: aliceblue;
+  */
+  color: #1e6b7b;
 }
 
 .article {
   color: black;
   font-family: 'Ubuntu';
   background-color: white;
-  background-color: rgba( 255, 255, 255, 0.7 );
+  background-color: rgba( 255, 255, 255, 0.5);
   border: 2px solid black;
   border-radius: 20px;
   margin: 10px 5px;
@@ -107,10 +111,10 @@ body {
   font-family: 'Ubuntu';
   font-size: 35px;
   background-color: white;
-  background-color: rgba( 255, 255, 255, 0.7 );
+  background-color: rgba( 255, 255, 255, 0.5 );
   border: 2px solid black;
   border-radius: 20px;
-  line-height: 100px;
+  line-height: 70px;
   margin: 10px auto;
   width: 100%;
   height: 100%;
@@ -134,7 +138,7 @@ body {
   color: black;
   font-family: 'Ubuntu';
   background-color: white;
-  background-color: rgba( 255, 255, 255, 0.7 );
+  background-color: rgba( 255, 255, 255, 0.5 );
   border: 2px solid black;
   border-radius: 20px;
   margin: 10px auto;

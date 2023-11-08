@@ -11,19 +11,24 @@
 
 .tabs-container > button {
     border: none;  /* border 제거 */
-    font-size: 1rem;
+    font-size: 1.5rem;
+    background-color:transparent;
+    color: #000080;
+    margin: 5px;
 }
 
 .tabs-container > button:hover {
-    color: aliceblue;
+    background-color:transparent;
+    border: transparent;
+    transform: scale(1.5);
 }
 
 .tabs {
     display: flex;
     padding: 10px;
     background-color: transparent;
-    border-radius: 2rem;
-    border: 0.15rem solid rgb(131, 120, 237);
+    border-radius: 1.5rem;
+    border: 0.15rem solid black;
 
     flex: 1;
     display: flex;
@@ -32,49 +37,72 @@
 }
 
 .tab {
-    padding: 10px 20px;
-    border-radius: 2rem;
+    padding: 5px 20px;
+    border-radius: 0.6rem;
     margin-right: 5px;
     cursor: pointer;
     display: inline-block;
     transition: background-color 0.7s;
+    background-color: aliceblue;
+    color: #000080;
 }
 
 .tab.active {
+    /*
     background-color: rgb(131, 120, 237);
     border-bottom-color: transparent;
     color: aliceblue;
+    */
+    border: 3px solid #C0C0C0;
+    color: #000080;
 }
 
 .tab:hover {
-    background-color: rgb(131, 120, 237);
-    color: aliceblue;
+    color: #000080;
 }
 
 
 .tab button {
+    border: 1px solid black;
     margin-left: 5px;
     border-radius: 5rem;
-    background-color: white;
-    color: rgb(131, 120, 237);
+    background-color: transparent;
+    color: #000080;
     border: none;
     cursor: pointer;
+    
 }
 
-button {
+.button {
+    /*
     color: black;
     background-color: transparent;
-    padding: 0.1rem 0.1rem;
+    padding: 0.05rem 0.1rem;
     border-radius: 0.5rem;
-    border: 0.15rem solid rgb(131, 120, 237);
+    border: 0.15rem solid #000080;
     cursor: pointer;
     transition: background-color 0.3s;
+    */
+    border: none;
+    padding: 15px 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+button{
+    border: 0.13rem solid black;
+    padding: 5px;
+    border-radius: 15px;
+    font-size: 15px;
 }
   
 button:hover {
-    background-color: darkblue;
-    color: white;
-    border: 0.15rem solid darkblue;
+    border: 0.13rem solid black;
+    letter-spacing: 1px;
+    transform: scale(1.05);
 }
 
 .input-container {

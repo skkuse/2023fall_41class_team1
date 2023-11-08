@@ -88,6 +88,7 @@ function App() {
             <MultiTabInput
               tabs={tabs}
               handleTabsChange={handleTabsChange}
+              class="custom-tab"
             ></MultiTabInput>
             <Button class="tab" onClick={onExecute}>
               Compile
