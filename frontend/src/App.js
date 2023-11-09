@@ -236,10 +236,12 @@ function App() {
               <div class="rowflex">
                 <div class="colelem-1">
                   <p>Cars</p>
+                  <img src="./assets/images/car.png"></img>
                   <ServerInfoItem>{serverInfo["Cars"]}</ServerInfoItem>
                 </div>
                 <div class="colelem-1">
                   <p>Phones</p>
+                  <img src="./assets/images/phone.png"></img>
                   <ServerInfoItem>{serverInfo["Phones"]}</ServerInfoItem>
                 </div>
                 <div class="colelem-1">
