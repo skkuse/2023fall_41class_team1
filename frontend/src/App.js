@@ -6,6 +6,8 @@ import ServerInfoItem from "components/ServerInfoItem";
 import MultiTabInput from "components/MultiTabInput";
 import Grid from "components/Grid";
 import { useMediaQuery } from "react-responsive";
+import carImg from "assets/images/car.png";
+import phoneImg from "assets/images/phone.png";
 
 function App() {
   const [tabs, setTabs] = useState([{ id: 1, javaCode: "" }]);
@@ -236,12 +238,12 @@ function App() {
               <div class="rowflex">
                 <div class="colelem-1">
                   <p>Cars</p>
-                  <img src="./assets/images/car.png"></img>
+                  <img src={carImg}></img>
                   <ServerInfoItem>{serverInfo["Cars"]}</ServerInfoItem>
                 </div>
                 <div class="colelem-1">
                   <p>Phones</p>
-                  <img src="./assets/images/phone.png"></img>
+                  <img src={phoneImg}></img>
                   <ServerInfoItem>{serverInfo["Phones"]}</ServerInfoItem>
                 </div>
                 <div class="colelem-1">
