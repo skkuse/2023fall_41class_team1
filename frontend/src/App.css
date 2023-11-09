@@ -54,6 +54,14 @@ body {
   flex-direction: column;
 }
 
+.rounded-image {
+  margin-top: 0.5rem;
+  border-radius: 50%;
+
+  width: 100px;
+  height: 100px;
+}
+
 .tab {
   padding: 5px 20px;
   border-radius: 1rem;

@@ -8,6 +8,8 @@ import Grid from "components/Grid";
 import { useMediaQuery } from "react-responsive";
 import carImg from "assets/images/car.png";
 import phoneImg from "assets/images/phone.png";
+import acImg from "assets/images/AC.png";
+import treeImg from "assets/images/tree.png";
 
 function App() {
   const [tabs, setTabs] = useState([{ id: 1, javaCode: "" }]);
@@ -238,20 +240,22 @@ function App() {
               <div class="rowflex">
                 <div class="colelem-1">
                   <p>Cars</p>
-                  <img src={carImg}></img>
+                  <img src={carImg} className="rounded-image"></img>
                   <ServerInfoItem>{serverInfo["Cars"]}</ServerInfoItem>
                 </div>
                 <div class="colelem-1">
                   <p>Phones</p>
-                  <img src={phoneImg}></img>
+                  <img src={phoneImg} className="rounded-image"></img>
                   <ServerInfoItem>{serverInfo["Phones"]}</ServerInfoItem>
                 </div>
                 <div class="colelem-1">
                   <p>Air Conditioners</p>
+                  <img src={acImg} className="rounded-image"></img>
                   <ServerInfoItem>{serverInfo["Air conditioners"]}</ServerInfoItem>
                 </div>
                 <div class="colelem-1 green">
                   <p>Trees</p>
+                  <img src={treeImg} className="rounded-image"></img>
                   <ServerInfoItem>{serverInfo["Trees"]}</ServerInfoItem>
                 </div>
               </div>
