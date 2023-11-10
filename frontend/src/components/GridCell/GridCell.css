@@ -1,0 +1,16 @@
+
+p {
+    margin: 0.7rem; /* server info 부분 content 간 간격 넓힘 */
+  }
+
+.main-container{
+  flex: 1;
+}
+
+img {
+  margin-top: 0.5rem;
+  border-radius: 50%;
+
+  width: 100px;
+  height: 100px;
+}

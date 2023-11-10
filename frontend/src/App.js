@@ -1,11 +1,14 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-
-import ServerInfoItem from "components/ServerInfoItem";
+import GridCell from "components/GridCell";
 import MultiTabInput from "components/MultiTabInput";
-import Grid from "components/Grid";
+import GridRow from "components/GridRow";
+import TitleGrid from "components/TitleGrid";
+
 import { useMediaQuery } from "react-responsive";
+import { parseTabsToJson } from "utilities/Utilities";
+
 import carImg from "assets/images/car.png";
 import phoneImg from "assets/images/phone.png";
 import acImg from "assets/images/AC.png";
@@ -31,7 +34,7 @@ function App() {
     "Total memory": "",
   });
 
-  const isBigScreen = useMediaQuery({ query: '(min-width: 1280px)' });
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1280px)" });
 
   const handleTabsChange = (newTabs) => {
     setTabs(newTabs);
@@ -41,17 +44,6 @@ function App() {
   //   setJavaCode(e.target.value);
   // };
 
-  const parseTabsToJson = () => {
-    var idx = 1;
-    const java_codes = tabs.reduce((acc, tab) => {
-      const codeKey = `code${idx}`;
-      acc[codeKey] = tab.javaCode;
-      idx++;
-      return acc;
-    }, {});
-    return java_codes;
-  };
-
   const onExecute = () => {
     fetch("http://localhost:8000/execute_java_code/", {
       method: "POST",
@@ -59,7 +51,7 @@ function App() {
         Authorization: `Bearer tokenhere`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ java_code: parseTabsToJson() }),
+      body: JSON.stringify({ java_code: parseTabsToJson(tabs) }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -74,6 +66,26 @@ function App() {
       .catch((error) => console.error("Error:", error));
   };
 
+  // useEffect(()=>{
+  //   fetch("http://localhost:8000/get_system_info/", {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer tokenhere`,
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((response) => {
+  //       setServerInfo(response.server_info);
+  //     })
+  //     .catch((error) => console.error("Error:", error));
+  // },[]);
+
   <link
     href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap"
     rel="stylesheet"
@@ -81,126 +93,67 @@ function App() {
 
   return (
     <div className="App">
-      {!isBigScreen &&
-        <div id="container-narrow">
-          <header id="title">
-            Green Algorithms
-          </header>
+      <div id="container-narrow">
+        <header id="title">Green Algorithms</header>
 
-          <nav id="input_code">
-            <p>Enter Code</p>
-            <MultiTabInput
-              tabs={tabs}
-              handleTabsChange={handleTabsChange}
-              class="custom-tab"
-            ></MultiTabInput>
-            <Button class="tab" onClick={onExecute}>
-              Compile
-            </Button>
-          </nav>
+        <nav id="input_code">
+          <p>Enter Code</p>
+          <MultiTabInput
+            tabs={tabs}
+            handleTabsChange={handleTabsChange}
+            class="custom-tab"
+          ></MultiTabInput>
+          <Button class="tab" onClick={onExecute}>
+            Compile
+          </Button>
+        </nav>
 
-          <article class="article" id="article-runtime">
-            <p id="server_info">Execution Results</p>
-            <div class="rowflex">
-              <div class="colelem-1">
-                <p>Execution Result</p>
-                <ServerInfoItem>{message}</ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>Elapsed Time</p>
-                <ServerInfoItem>{serverInfo["Elapsed time"]}</ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>Used Memory</p>
-                <ServerInfoItem>{serverInfo["Used memory"]}</ServerInfoItem>
-              </div>
-              <div class="colelem-1 green">
-                <p>Carbon Emission</p>
-                <ServerInfoItem>{serverInfo["Carbon emission"]}</ServerInfoItem>
-              </div>
-            </div>
-          </article>
+        <div id="result-panel">
+          <TitleGrid title="Execution Results">
+            <GridRow>
+              <GridCell title="Execution Result"></GridCell>
+              <GridCell title="Elapsed Time"></GridCell>
+              <GridCell title="Used Memory" content="asdasd"></GridCell>
+              <GridCell title="Carbon Emission"></GridCell>
+            </GridRow>
+          </TitleGrid>
 
-          <article class="article" id="article-effect">
-            <p id="server_info">It resembles to...</p>
-            <div class="rowflex">
-              <div class="colelem-1">
-                <p>Cars</p>
-                <ServerInfoItem>{serverInfo["Cars"]}</ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>Phones</p>
-                <ServerInfoItem>{serverInfo["Phones"]}</ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>Air Conditioners</p>
-                <ServerInfoItem>{serverInfo["Air conditioners"]}</ServerInfoItem>
-              </div>
-              <div class="colelem-1 green">
-                <p>Trees</p>
-                <ServerInfoItem>{serverInfo["Trees"]}</ServerInfoItem>
-              </div>
-            </div>
-          </article>
 
-          <article class="article" id="article-message">
-            <p id="server_info">Server Message</p>
+          <TitleGrid title="It resembles to...">
+            <GridRow>
+              <GridCell title="Cars" imgURL={carImg}></GridCell>
+              <GridCell title="Phones" imgURL={phoneImg}></GridCell>
+              <GridCell title="Air Conditioners" imgURL={acImg}></GridCell>
+              <GridCell title="Trees" imgURL={treeImg}></GridCell>
+            </GridRow>
+          </TitleGrid>
+
+          <TitleGrid title="Server Message">
             <textarea id="server_message" readOnly></textarea>
-          </article>
+          </TitleGrid>
 
-          <article class="article" id="article-extra">
-            <p id="server_info">Extra Server Information</p>
-            <div class="rowflex">
-              <div class="colelem-1">
-                <p>Logical CPU Cores</p>
-                <ServerInfoItem>
-                  {serverInfo["Total CPU cores (including logical)"]}
-                </ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>Physical CPU Cores</p>
-                <ServerInfoItem>
-                  {serverInfo["Physical CPU cores"]}
-                </ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>Maximum CPU Frequency</p>
-                <ServerInfoItem>
-                  {serverInfo["Maximum CPU frequency"]}
-                </ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>Total Memory</p>
-                <ServerInfoItem>{serverInfo["Total memory"]}</ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>Available Memory</p>
-                <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
-              </div>
-            </div>
-            <div class="rowflex">
-              <div class="colelem-1">
-                <p>City</p>
-                <ServerInfoItem>{serverInfo["City"]}</ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>State</p>
-                <ServerInfoItem>{serverInfo["State"]}</ServerInfoItem>
-              </div>
-              <div class="colelem-1">
-                <p>Country</p>
-                <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
-              </div>
-            </div>
-          </article>
+          <TitleGrid title="Extra Server Information">
+            <GridRow>
+              <GridCell title="Total CPU cores (including logical)"></GridCell>
+              <GridCell title="Physical CPU cores"></GridCell>
+              <GridCell
+                title="Maximum CPU frequency"
+                content="asdasd"
+              ></GridCell>
+              <GridCell title="Total memory"></GridCell>
+              <GridCell title="Available memory"></GridCell>
+            </GridRow>
+            <GridRow>
+              <GridCell title="City"></GridCell>
+              <GridCell title="State"></GridCell>
+              <GridCell title="Country" content="asdasd"></GridCell>
+            </GridRow>
+          </TitleGrid>
         </div>
-      }
-
-      {isBigScreen &&
+      </div>
+      {/* {isBigScreen && (
         <div id="container-wide">
-          <header id="title">
-            Green Algorithms
-          </header>
+          <header id="title">Green Algorithms</header>
 
           <nav id="input_code">
             <p>Enter Code</p>
@@ -219,102 +172,100 @@ function App() {
               <div class="rowflex">
                 <div class="colelem-1">
                   <p>Execution Result</p>
-                  <ServerInfoItem>{message}</ServerInfoItem>
+                  <GridCell>{message}</GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>Elapsed Time</p>
-                  <ServerInfoItem>{serverInfo["Elapsed time"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Elapsed time"]}</GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>Used Memory</p>
-                  <ServerInfoItem>{serverInfo["Used memory"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Used memory"]}</GridCell>
                 </div>
                 <div class="colelem-1 green">
                   <p>Carbon Emission</p>
-                  <ServerInfoItem>{serverInfo["Carbon emission"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Carbon emission"]}</GridCell>
                 </div>
               </div>
             </article>
+
             <article class="article colelem-1" id="article-effect">
               <p id="server_info">It resembles to...</p>
               <div class="rowflex">
                 <div class="colelem-1">
                   <p>Cars</p>
                   <img src={carImg} className="rounded-image"></img>
-                  <ServerInfoItem>{serverInfo["Cars"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Cars"]}</GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>Phones</p>
                   <img src={phoneImg} className="rounded-image"></img>
-                  <ServerInfoItem>{serverInfo["Phones"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Phones"]}</GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>Air Conditioners</p>
                   <img src={acImg} className="rounded-image"></img>
-                  <ServerInfoItem>{serverInfo["Air conditioners"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Air conditioners"]}</GridCell>
                 </div>
                 <div class="colelem-1 green">
                   <p>Trees</p>
                   <img src={treeImg} className="rounded-image"></img>
-                  <ServerInfoItem>{serverInfo["Trees"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Trees"]}</GridCell>
                 </div>
               </div>
             </article>
           </div>
 
           <div class="rowflex">
-              <article class="article colelem-1" id="article-extra">
+            <article class="article colelem-1" id="article-extra">
               <p id="server_info">Extra Server Information</p>
               <div class="rowflex">
                 <div class="colelem-1">
                   <p>Logical CPU Cores</p>
-                  <ServerInfoItem>
+                  <GridCell>
                     {serverInfo["Total CPU cores (including logical)"]}
-                  </ServerInfoItem>
+                  </GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>Physical CPU Cores</p>
-                  <ServerInfoItem>
-                    {serverInfo["Physical CPU cores"]}
-                  </ServerInfoItem>
+                  <GridCell>{serverInfo["Physical CPU cores"]}</GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>Maximum CPU Frequency</p>
-                  <ServerInfoItem>
-                    {serverInfo["Maximum CPU frequency"]}
-                  </ServerInfoItem>
+                  <GridCell>{serverInfo["Maximum CPU frequency"]}</GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>Total Memory</p>
-                  <ServerInfoItem>{serverInfo["Total memory"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Total memory"]}</GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>Available Memory</p>
-                  <ServerInfoItem>{serverInfo["Available memory"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Available memory"]}</GridCell>
                 </div>
               </div>
               <div class="rowflex">
                 <div class="colelem-1">
                   <p>City</p>
-                  <ServerInfoItem>{serverInfo["City"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["City"]}</GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>State</p>
-                  <ServerInfoItem>{serverInfo["State"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["State"]}</GridCell>
                 </div>
                 <div class="colelem-1">
                   <p>Country</p>
-                  <ServerInfoItem>{serverInfo["Country"]}</ServerInfoItem>
+                  <GridCell>{serverInfo["Country"]}</GridCell>
                 </div>
               </div>
             </article>
+
             <article class="article colelem-1" id="article-message">
               <p id="server_info">Server Message</p>
               <textarea id="server_message" readOnly></textarea>
             </article>
           </div>
         </div>
-      }
+      )} */}
     </div>
   );
 }
