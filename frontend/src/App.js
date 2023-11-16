@@ -22,6 +22,8 @@ function App() {
   //       System.out.println("Hello from Java!");
   //     }
   //   }`);
+
+  
   const [message, setMessage] = useState("");
   const [serverInfo, setServerInfo] = useState({
     "Available memory": "",
