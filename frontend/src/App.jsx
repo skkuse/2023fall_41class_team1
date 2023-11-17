@@ -182,11 +182,11 @@ function App() {
               ></GridCell>
             </GridRow>
             <GridRow>
-              <GridCell title="City" content={serverInfo["City"]}></GridCell>
-              <GridCell title="State" content={serverInfo["State"]}></GridCell>
+              <GridCell title="City" content={serverInfo ? serverInfo["City"]: "-"}></GridCell>
+              <GridCell title="State" content={serverInfo ? serverInfo["State"]: "-"}></GridCell>
               <GridCell
                 title="Country"
-                content={serverInfo["Country"]}
+                content={serverInfo ? serverInfo["Country"]: "-"}
               ></GridCell>
             </GridRow>
           </TitleGrid>
