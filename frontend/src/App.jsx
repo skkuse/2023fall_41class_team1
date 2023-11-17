@@ -22,6 +22,8 @@ function App() {
   //       System.out.println("Hello from Java!");
   //     }
   //   }`);
+
+  
   const [message, setMessage] = useState("");
   const [serverInfo, setServerInfo] = useState({
     "Available memory": "",
@@ -128,10 +130,6 @@ function App() {
             </GridRow>
           </TitleGrid>
 
-          <TitleGrid title="Server Message">
-            <textarea id="server_message" readOnly></textarea>
-          </TitleGrid>
-
           <TitleGrid title="Extra Server Information">
             <GridRow>
               <GridCell title="Total CPU cores (including logical)"></GridCell>
@@ -149,6 +147,11 @@ function App() {
               <GridCell title="Country" content="asdasd"></GridCell>
             </GridRow>
           </TitleGrid>
+
+          <TitleGrid title="Server Message">
+            <textarea id="server_message" readOnly></textarea>
+          </TitleGrid>
+
         </div>
       </div>
       {/* {isBigScreen && (
