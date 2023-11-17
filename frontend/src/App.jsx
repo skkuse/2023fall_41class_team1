@@ -8,6 +8,7 @@ import TitleGrid from "components/TitleGrid";
 
 import { useMediaQuery } from "react-responsive";
 import { parseTabsToJson } from "utilities/Utilities";
+import { fetchServerInfo, getExecutionResult } from "utilities/serverRequests";
 
 import carImg from "assets/images/car.png";
 import phoneImg from "assets/images/phone.png";
@@ -23,70 +24,50 @@ function App() {
   //     }
   //   }`);
 
-  
   const [message, setMessage] = useState("");
-  const [serverInfo, setServerInfo] = useState({
-    "Available memory": "",
-    City: "",
-    Country: "",
-    "Maximum CPU frequency": "",
-    "Physical CPU cores": "",
-    State: "",
-    "Total CPU cores (including logical)": "",
-    "Total memory": "",
+  const [executionResult, setExecutionResult] = useState({
+    status: "-",
+    output: "-",
+    runtime: "-",
+    carbon_emission: "-",
+    carbonEmissionMetrics: {},
   });
-
-  const isBigScreen = useMediaQuery({ query: "(min-width: 1280px)" });
+  const [serverInfo, setServerInfo] = useState({
+    "Available memory": "-",
+    City: "-",
+    Country: "-",
+    "Maximum CPU frequency": "-",
+    "Physical CPU cores": "-",
+    State: "-",
+    "Total CPU cores (including logical)": "-",
+    "Total memory": "-",
+  });
 
   const handleTabsChange = (newTabs) => {
     setTabs(newTabs);
   };
 
-  // const onInputChange = (e) => {
-  //   setJavaCode(e.target.value);
-  // };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const serverInfo = await fetchServerInfo();
+        setServerInfo(serverInfo);
+      } catch (error) {
+        console.error("Error in execution:", error);
+      }
+    };
 
-  const onExecute = () => {
-    fetch("http://localhost:8000/execute_java_code/", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer tokenhere`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ java_code: parseTabsToJson(tabs) }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((response) => {
-        setMessage(response.output);
-        setServerInfo(response.server_info);
-      })
-      .catch((error) => console.error("Error:", error));
+    fetchData();
+  }, []);
+
+  const onExecute = async () => {
+    try {
+      const result = await getExecutionResult(tabs);
+      setExecutionResult(result);
+    } catch (error) {
+      console.error("Error in execution:", error);
+    }
   };
-
-  // useEffect(()=>{
-  //   fetch("http://localhost:8000/get_system_info/", {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer tokenhere`,
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((response) => {
-  //       setServerInfo(response.server_info);
-  //     })
-  //     .catch((error) => console.error("Error:", error));
-  // },[]);
 
   <link
     href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap"
@@ -111,47 +92,115 @@ function App() {
         </nav>
 
         <div id="result-panel">
-          <TitleGrid title="Execution Results">
-            <GridRow>
-              <GridCell title="Execution Result"></GridCell>
-              <GridCell title="Elapsed Time"></GridCell>
-              <GridCell title="Used Memory" content="asdasd"></GridCell>
-              <GridCell title="Carbon Emission"></GridCell>
-            </GridRow>
-          </TitleGrid>
+          {executionResult && (
+            <TitleGrid title="Execution Results">
+              <GridRow>
+                <GridCell
+                  title="Execution Result"
+                  content={executionResult["status"]}
+                ></GridCell>
+                <GridCell
+                  title="Elapsed Time"
+                  content={executionResult["runtime"]}
+                ></GridCell>
+                <GridCell
+                  title="Used Memory"
+                  content="이거 없애야 되는거 아님?"
+                ></GridCell>
+                <GridCell
+                  title="Carbon Emission"
+                  content={executionResult["carbon_emission"]}
+                ></GridCell>
+              </GridRow>
+            </TitleGrid>
+          )}
+          {executionResult &&
+            executionResult["carbonEmissionMetrics"] !== {} && (
+              <TitleGrid title="It resembles to...">
+                <GridRow>
+                  <GridCell
+                    title="Cars"
+                    imgURL={carImg}
+                    content={
+                      executionResult["carbonEmissionMetrics"][
+                        "car_emission_equiv"
+                      ]
+                    }
+                  ></GridCell>
+                  <GridCell
+                    title="Phones"
+                    imgURL={phoneImg}
+                    content={
+                      executionResult["carbonEmissionMetrics"][
+                        "phone_emission_equiv"
+                      ]
+                    }
+                  ></GridCell>
+                  <GridCell
+                    title="Air Conditioners"
+                    imgURL={acImg}
+                    content={
+                      executionResult["carbonEmissionMetrics"][
+                        "air_conditioner_emission_equiv"
+                      ]
+                    }
+                  ></GridCell>
+                  <GridCell
+                    title="Trees"
+                    imgURL={treeImg}
+                    content={
+                      executionResult["carbonEmissionMetrics"][
+                        "tree_emission_equiv"
+                      ]
+                    }
+                  ></GridCell>
+                </GridRow>
+              </TitleGrid>
+            )}
 
-
-          <TitleGrid title="It resembles to...">
-            <GridRow>
-              <GridCell title="Cars" imgURL={carImg}></GridCell>
-              <GridCell title="Phones" imgURL={phoneImg}></GridCell>
-              <GridCell title="Air Conditioners" imgURL={acImg}></GridCell>
-              <GridCell title="Trees" imgURL={treeImg}></GridCell>
-            </GridRow>
-          </TitleGrid>
-
-          <TitleGrid title="Extra Server Information">
-            <GridRow>
-              <GridCell title="Total CPU cores (including logical)"></GridCell>
-              <GridCell title="Physical CPU cores"></GridCell>
-              <GridCell
-                title="Maximum CPU frequency"
-                content="asdasd"
-              ></GridCell>
-              <GridCell title="Total memory"></GridCell>
-              <GridCell title="Available memory"></GridCell>
-            </GridRow>
-            <GridRow>
-              <GridCell title="City"></GridCell>
-              <GridCell title="State"></GridCell>
-              <GridCell title="Country" content="asdasd"></GridCell>
-            </GridRow>
-          </TitleGrid>
+          {serverInfo && (
+            <TitleGrid title="Extra Server Information">
+              <GridRow>
+                <GridCell
+                  title="Total CPU cores (including logical)"
+                  content={serverInfo["Total CPU cores (including logical)"]}
+                ></GridCell>
+                <GridCell
+                  title="Physical CPU cores"
+                  content={serverInfo["Physical CPU cores"]}
+                ></GridCell>
+                <GridCell
+                  title="Maximum CPU frequency"
+                  content={serverInfo["Maximum CPU frequency"]}
+                ></GridCell>
+                <GridCell
+                  title="Total memory"
+                  content={parseFloat(serverInfo["Total memory"]).toFixed(2)}
+                ></GridCell>
+                <GridCell
+                  title="Available memory"
+                  content={parseFloat(serverInfo["Available memory"]).toFixed(
+                    2
+                  )}
+                ></GridCell>
+              </GridRow>
+              <GridRow>
+                <GridCell title="City" content={serverInfo["City"]}></GridCell>
+                <GridCell
+                  title="State"
+                  content={serverInfo["State"]}
+                ></GridCell>
+                <GridCell
+                  title="Country"
+                  content={serverInfo["Country"]}
+                ></GridCell>
+              </GridRow>
+            </TitleGrid>
+          )}
 
           <TitleGrid title="Server Message">
             <textarea id="server_message" readOnly></textarea>
           </TitleGrid>
-
         </div>
       </div>
       {/* {isBigScreen && (
