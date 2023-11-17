@@ -36,3 +36,15 @@ def get_carbon_footprint(java_execution_result, system_info):
 
     print(carbon_footprint)
     return carbon_footprint
+
+
+def emission_converter(carbon_emission):
+    car_emission_equiv = carbon_emission/141.4
+    phone_emission_equiv = carbon_emission /7.4 * 100
+    air_conditioner_emission_equiv = carbon_emission / 870
+    tree_emission_equiv = carbon_emission/917
+
+    return {"car_emission_equiv":car_emission_equiv,
+    "phone_emission_equiv":phone_emission_equiv,
+    "air_conditioner_emission_equiv":air_conditioner_emission_equiv,
+    "tree_emission_equiv":tree_emission_equiv}
