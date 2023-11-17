@@ -96,6 +96,12 @@ function App() {
             <TitleGrid title="Execution Results">
               <GridRow>
                 <GridCell
+                  title="Carbon Emission"
+                  content={executionResult["carbon_emission"]}
+                ></GridCell>
+              </GridRow>
+              <GridRow>
+                <GridCell
                   title="Execution Result"
                   content={executionResult["status"]}
                 ></GridCell>
@@ -106,10 +112,6 @@ function App() {
                 <GridCell
                   title="Used Memory"
                   content="이거 없애야 되는거 아님?"
-                ></GridCell>
-                <GridCell
-                  title="Carbon Emission"
-                  content={executionResult["carbon_emission"]}
                 ></GridCell>
               </GridRow>
             </TitleGrid>
