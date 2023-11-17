@@ -158,166 +158,45 @@ function App() {
               </TitleGrid>
             )}
 
-          {serverInfo && (
-            <TitleGrid title="Extra Server Information">
-              <GridRow>
-                <GridCell
-                  title="Total CPU cores (including logical)"
-                  content={serverInfo["Total CPU cores (including logical)"]}
-                ></GridCell>
-                <GridCell
-                  title="Physical CPU cores"
-                  content={serverInfo["Physical CPU cores"]}
-                ></GridCell>
-                <GridCell
-                  title="Maximum CPU frequency"
-                  content={serverInfo["Maximum CPU frequency"]}
-                ></GridCell>
-                <GridCell
-                  title="Total memory"
-                  content={parseFloat(serverInfo["Total memory"]).toFixed(2)}
-                ></GridCell>
-                <GridCell
-                  title="Available memory"
-                  content={parseFloat(serverInfo["Available memory"]).toFixed(
-                    2
-                  )}
-                ></GridCell>
-              </GridRow>
-              <GridRow>
-                <GridCell title="City" content={serverInfo["City"]}></GridCell>
-                <GridCell
-                  title="State"
-                  content={serverInfo["State"]}
-                ></GridCell>
-                <GridCell
-                  title="Country"
-                  content={serverInfo["Country"]}
-                ></GridCell>
-              </GridRow>
-            </TitleGrid>
-          )}
+          <TitleGrid title="Extra Server Information">
+            <GridRow>
+              <GridCell
+                title="Total CPU cores (including logical)"
+                content={serverInfo ? serverInfo["Total CPU cores (including logical)"] : "-"}
+              ></GridCell>
+              <GridCell
+                title="Physical CPU cores"
+                content={serverInfo ? serverInfo["Physical CPU cores"]: "-"}
+              ></GridCell>
+              <GridCell
+                title="Maximum CPU frequency"
+                content={serverInfo ? serverInfo["Maximum CPU frequency"]: "-"}
+              ></GridCell>
+              <GridCell
+                title="Total memory"
+                content={serverInfo ? parseFloat(serverInfo["Total memory"]).toFixed(2): "-"}
+              ></GridCell>
+              <GridCell
+                title="Available memory"
+                content={serverInfo ? parseFloat(serverInfo["Available memory"]).toFixed(2): "-"}
+              ></GridCell>
+            </GridRow>
+            <GridRow>
+              <GridCell title="City" content={serverInfo["City"]}></GridCell>
+              <GridCell title="State" content={serverInfo["State"]}></GridCell>
+              <GridCell
+                title="Country"
+                content={serverInfo["Country"]}
+              ></GridCell>
+            </GridRow>
+          </TitleGrid>
 
           <TitleGrid title="Server Message">
             <textarea id="server_message" readOnly></textarea>
           </TitleGrid>
         </div>
       </div>
-      {/* {isBigScreen && (
-        <div id="container-wide">
-          <header id="title">Green Algorithms</header>
-
-          <nav id="input_code">
-            <p>Enter Code</p>
-            <MultiTabInput
-              tabs={tabs}
-              handleTabsChange={handleTabsChange}
-            ></MultiTabInput>
-            <Button class="tab" onClick={onExecute}>
-              Compile
-            </Button>
-          </nav>
-
-          <div class="rowflex">
-            <article class="article colelem-1" id="article-runtime">
-              <p id="server_info">Execution Results</p>
-              <div class="rowflex">
-                <div class="colelem-1">
-                  <p>Execution Result</p>
-                  <GridCell>{message}</GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>Elapsed Time</p>
-                  <GridCell>{serverInfo["Elapsed time"]}</GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>Used Memory</p>
-                  <GridCell>{serverInfo["Used memory"]}</GridCell>
-                </div>
-                <div class="colelem-1 green">
-                  <p>Carbon Emission</p>
-                  <GridCell>{serverInfo["Carbon emission"]}</GridCell>
-                </div>
-              </div>
-            </article>
-
-            <article class="article colelem-1" id="article-effect">
-              <p id="server_info">It resembles to...</p>
-              <div class="rowflex">
-                <div class="colelem-1">
-                  <p>Cars</p>
-                  <img src={carImg} className="rounded-image"></img>
-                  <GridCell>{serverInfo["Cars"]}</GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>Phones</p>
-                  <img src={phoneImg} className="rounded-image"></img>
-                  <GridCell>{serverInfo["Phones"]}</GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>Air Conditioners</p>
-                  <img src={acImg} className="rounded-image"></img>
-                  <GridCell>{serverInfo["Air conditioners"]}</GridCell>
-                </div>
-                <div class="colelem-1 green">
-                  <p>Trees</p>
-                  <img src={treeImg} className="rounded-image"></img>
-                  <GridCell>{serverInfo["Trees"]}</GridCell>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="rowflex">
-            <article class="article colelem-1" id="article-extra">
-              <p id="server_info">Extra Server Information</p>
-              <div class="rowflex">
-                <div class="colelem-1">
-                  <p>Logical CPU Cores</p>
-                  <GridCell>
-                    {serverInfo["Total CPU cores (including logical)"]}
-                  </GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>Physical CPU Cores</p>
-                  <GridCell>{serverInfo["Physical CPU cores"]}</GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>Maximum CPU Frequency</p>
-                  <GridCell>{serverInfo["Maximum CPU frequency"]}</GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>Total Memory</p>
-                  <GridCell>{serverInfo["Total memory"]}</GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>Available Memory</p>
-                  <GridCell>{serverInfo["Available memory"]}</GridCell>
-                </div>
-              </div>
-              <div class="rowflex">
-                <div class="colelem-1">
-                  <p>City</p>
-                  <GridCell>{serverInfo["City"]}</GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>State</p>
-                  <GridCell>{serverInfo["State"]}</GridCell>
-                </div>
-                <div class="colelem-1">
-                  <p>Country</p>
-                  <GridCell>{serverInfo["Country"]}</GridCell>
-                </div>
-              </div>
-            </article>
-
-            <article class="article colelem-1" id="article-message">
-              <p id="server_info">Server Message</p>
-              <textarea id="server_message" readOnly></textarea>
-            </article>
-          </div>
-        </div>
-      )} */}
+      
     </div>
   );
 }
