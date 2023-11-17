@@ -109,10 +109,6 @@ function App() {
                   title="Elapsed Time"
                   content={executionResult["runtime"]}
                 ></GridCell>
-                <GridCell
-                  title="Used Memory"
-                  content="이거 없애야 되는거 아님?"
-                ></GridCell>
               </GridRow>
             </TitleGrid>
           )}
