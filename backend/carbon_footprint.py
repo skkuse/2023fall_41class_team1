@@ -34,7 +34,6 @@ def get_carbon_footprint(java_execution_result, system_info):
     energy_needed = runtime * (power_draw_for_cores * usage+  power_draw_for_memory) * PUE * PSF
     carbon_footprint = energy_needed * CARBON_INTENSITY
 
-    print(carbon_footprint)
     return carbon_footprint
 
 

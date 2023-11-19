@@ -28,7 +28,6 @@ async def execute_code(payload: JavaCode):
     java_execution_result = execute_java_code(payload.java_code)
 
     carbon_emission = get_carbon_footprint(java_execution_result, system_info)
-    print(java_execution_result["output"])
     carbonEmissionMetrics = emission_converter(carbon_emission)
     if java_execution_result.get("status") == "Success":
       return {
