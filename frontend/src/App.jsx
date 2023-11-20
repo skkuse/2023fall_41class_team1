@@ -30,7 +30,12 @@ function App() {
     output: "-",
     runtime: "-",
     carbon_emission: "-",
-    carbonEmissionMetrics: {},
+    carbonEmissionMetrics: {
+      car_emission_equiv: "-",
+      phone_emission_equiv: "-",
+      air_conditioner_emission_equiv: "-",
+      tree_emission_equiv: "-",
+    },
   });
   const [serverInfo, setServerInfo] = useState({
     "Available memory": "-",
@@ -112,8 +117,7 @@ function App() {
               </GridRow>
             </TitleGrid>
           )}
-          {executionResult &&
-            executionResult["carbonEmissionMetrics"] !== {} && (
+          {executionResult && (
               <TitleGrid title="It resembles to...">
                 <GridRow>
                   <GridCell
