@@ -20,30 +20,34 @@ function GridCell(props) {
   const { sx, ...other } = props;
 
   return (
-    <div class="main-container">
-      <p>{props.title}</p>
-      {props.imgURL !== undefined && <img src={props.imgURL} alt="Grid Cell" />}
+    <div className="main-container">
+      <div className="upper-content">
+        <p>{props.title}</p>
+      </div>
 
-      <Box
-        sx={{
-          bgcolor: (theme) =>
-            theme.palette.mode === "dark" ? "#101010" : "#fff",
-          color: (theme) =>
-            theme.palette.mode === "dark" ? "grey.300" : "grey.800",
-          border: "1px solid",
-          borderColor: (theme) =>
-            theme.palette.mode === "dark" ? "grey.800" : "grey.300",
-          p: 1,
-          m: 1,
-          borderRadius: 2,
-          fontSize: "0.875rem",
-          fontWeight: "700",
-          ...sx,
-        }}
-        {...other}
-      >
-        {props.content}
-      </Box>
+      <div className="lower-content">
+        {props.imgurl !== undefined && <img src={props.imgurl} alt="Grid Cell" />}
+        <Box
+          sx={{
+            bgcolor: (theme) =>
+              theme.palette.mode === "dark" ? "#101010" : "#fff",
+            color: (theme) =>
+              theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+            border: "1px solid",
+            borderColor: (theme) =>
+              theme.palette.mode === "dark" ? "grey.800" : "grey.300",
+            p: 1,
+            m: 1,
+            borderRadius: 2,
+            fontSize: "0.875rem",
+            fontWeight: "700",
+            ...sx,
+          }}
+          {...other}
+        >
+          {props.content}
+        </Box>
+      </div>
     </div>
   );
 }

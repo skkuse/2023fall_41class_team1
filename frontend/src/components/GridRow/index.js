@@ -5,7 +5,7 @@ const GridRow=(props)=>{
 
     
     return(
-        <div class="row">
+        <div className="row">
             {props.children}
         </div>
     )
