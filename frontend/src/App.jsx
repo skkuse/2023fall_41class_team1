@@ -24,7 +24,6 @@ function App() {
   //     }
   //   }`);
 
-  const [message, setMessage] = useState("");
   const [executionResult, setExecutionResult] = useState({
     status: "-",
     output: "-",
@@ -63,7 +62,13 @@ function App() {
   const onExecute = async () => {
     try {
       const result = await getExecutionResult(tabs);
-      setExecutionResult(result);
+      console.log(result);
+      if (result.status === "Failed") {
+        alert("컴파일중 오류가 발생했습니다. 코드를 다시 입력해주세요.\n에러 메시지 : " + result.detail)
+        return;
+      } else {
+        setExecutionResult(result);
+      }
     } catch (error) {
       console.error("Error in execution:", error);
     }
@@ -160,31 +165,49 @@ function App() {
             <GridRow>
               <GridCell
                 title="Total CPU cores (including logical)"
-                content={serverInfo ? serverInfo["Total CPU cores (including logical)"] : "-"}
+                content={
+                  serverInfo
+                    ? serverInfo["Total CPU cores (including logical)"]
+                    : "-"
+                }
               ></GridCell>
               <GridCell
                 title="Physical CPU cores"
-                content={serverInfo ? serverInfo["Physical CPU cores"]: "-"}
+                content={serverInfo ? serverInfo["Physical CPU cores"] : "-"}
               ></GridCell>
               <GridCell
                 title="Maximum CPU frequency"
-                content={serverInfo ? serverInfo["Maximum CPU frequency"]: "-"}
+                content={serverInfo ? serverInfo["Maximum CPU frequency"] : "-"}
               ></GridCell>
               <GridCell
                 title="Total memory"
-                content={serverInfo ? parseFloat(serverInfo["Total memory"]).toFixed(2): "-"}
+                content={
+                  serverInfo
+                    ? parseFloat(serverInfo["Total memory"]).toFixed(2)
+                    : "-"
+                }
               ></GridCell>
               <GridCell
                 title="Available memory"
-                content={serverInfo ? parseFloat(serverInfo["Available memory"]).toFixed(2): "-"}
+                content={
+                  serverInfo
+                    ? parseFloat(serverInfo["Available memory"]).toFixed(2)
+                    : "-"
+                }
               ></GridCell>
             </GridRow>
             <GridRow>
-              <GridCell title="City" content={serverInfo ? serverInfo["City"]: "-"}></GridCell>
-              <GridCell title="State" content={serverInfo ? serverInfo["State"]: "-"}></GridCell>
+              <GridCell
+                title="City"
+                content={serverInfo ? serverInfo["City"] : "-"}
+              ></GridCell>
+              <GridCell
+                title="State"
+                content={serverInfo ? serverInfo["State"] : "-"}
+              ></GridCell>
               <GridCell
                 title="Country"
-                content={serverInfo ? serverInfo["Country"]: "-"}
+                content={serverInfo ? serverInfo["Country"] : "-"}
               ></GridCell>
             </GridRow>
           </TitleGrid>
@@ -194,7 +217,6 @@ function App() {
           </TitleGrid>
         </div>
       </div>
-      
     </div>
   );
 }
