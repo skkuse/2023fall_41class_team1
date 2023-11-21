@@ -14,8 +14,10 @@ add_middleware(app)
 
 system_info = get_system_info()
 
+
 class JavaCode(BaseModel):
-    java_code: Dict[str, str] 
+    java_code: Dict[str, str]
+
 
 @app.get("/")
 def test():
@@ -26,6 +28,11 @@ def test():
 async def execute_code(payload: JavaCode):
   try:
     java_execution_result = execute_java_code(payload.java_code)
+    if java_execution_result.get('status') == 'Failed':
+      return {
+          "status": "Failed",
+          "detail": java_execution_result["error"]
+      }
 
     carbon_emission = get_carbon_footprint(java_execution_result, system_info)
     carbonEmissionMetrics = emission_converter(carbon_emission)
@@ -33,15 +40,14 @@ async def execute_code(payload: JavaCode):
       return {
           "status": "Success",
           "output": java_execution_result["output"],
-          "runtime" : java_execution_result['runtime'],
-          "carbon_emission":carbon_emission,
+          "runtime": java_execution_result['runtime'],
+          "carbon_emission": carbon_emission,
           "carbonEmissionMetrics": carbonEmissionMetrics
       }
-    else:
-        return java_execution_result
 
   except Exception as e:
-    raise HTTPException(status_code=500, detail=str(e))
+    return {"status" : "Failed", "detail":str(e)}
+    # raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/get_system_info/")

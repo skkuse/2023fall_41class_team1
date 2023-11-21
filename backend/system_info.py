@@ -10,7 +10,7 @@ def get_system_info():
     cpu_name = cpuinfo.get_cpu_info()['brand_raw']
     cpu_core_num = cpuinfo.get_cpu_info()['count']
     cpu_logical = psutil.cpu_count(logical=True)
-    cpu_freq = psutil.cpu_freq().max
+    cpu_freq = psutil.cpu_freq().max    # 여기 mac에서 오류난다함 예외처리하기
     memory_info = psutil.virtual_memory()
 
     g = geocoder.ip('me')

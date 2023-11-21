@@ -39,15 +39,21 @@ def execute_java_code(java_codes: dict):
             raise Exception("No class with a main method found")
 
         start_time = time.perf_counter()
-        execute_result = subprocess.run(
-            ['java', '-Xint', main_class_name], capture_output=True, text=True)
-        end_time = time.perf_counter()
+        end_time = 0
+        try:
+            execute_result = subprocess.run(
+                ['java', '-Xint', main_class_name],
+                capture_output=True, text=True, timeout=10)  # Set timeout to 10 seconds
+        except subprocess.TimeoutExpired:
+            delete_java_files(file_names, class_names)
+            return {"status": "Failed", "error": "The Java program execution exceeded the time limit of 10 seconds and was terminated."}
+            # Handle the timeout situation as needed
+        else:
+            end_time = time.perf_counter()
         runtime = end_time - start_time
         print(runtime)
         # .java랑 .class파일 지우기
-        for file_name, class_name in zip(file_names, class_names):
-            os.remove(file_name)
-            os.remove(f"{class_name}.class")
+        delete_java_files(file_names, class_names)
 
         return {"status": "Success", "output": execute_result.stdout, "runtime": runtime}
 
@@ -65,6 +71,10 @@ def execute_java_code(java_codes: dict):
         print(str(e))
         return {"status": "Failed", "error": str(e)}
 
+def delete_java_files(file_names, class_names):
+    for file_name, class_name in zip(file_names, class_names):
+        os.remove(file_name)
+        os.remove(f"{class_name}.class")
 
 java_codes_example = {
     "code3": """
