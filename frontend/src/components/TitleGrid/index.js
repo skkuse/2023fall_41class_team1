@@ -3,8 +3,8 @@ import "./TitleGrid.css";
 
 const TitleGrid = (props) => {
   return (
-    <div class="grid-box">
-        <p class="title-box">{props.title}</p>
+    <div className="grid-box">
+        <p className="title-box">{props.title}</p>
         {props.children}
     </div>
   );

@@ -89,7 +89,7 @@ function App() {
           <MultiTabInput
             tabs={tabs}
             handleTabsChange={handleTabsChange}
-            class="custom-tab"
+            className="custom-tab"
           ></MultiTabInput>
           <Button class="tab" onClick={onExecute}>
             Compile
@@ -117,48 +117,57 @@ function App() {
               </GridRow>
             </TitleGrid>
           )}
+          {!executionResult && (
+            <TitleGrid title="Results Not Available">
+            </TitleGrid>
+          )}
+
           {executionResult && (
-              <TitleGrid title="It resembles to...">
-                <GridRow>
-                  <GridCell
-                    title="Cars"
-                    imgURL={carImg}
-                    content={
-                      executionResult["carbonEmissionMetrics"][
-                        "car_emission_equiv"
-                      ]
-                    }
-                  ></GridCell>
-                  <GridCell
-                    title="Phones"
-                    imgURL={phoneImg}
-                    content={
-                      executionResult["carbonEmissionMetrics"][
-                        "phone_emission_equiv"
-                      ]
-                    }
-                  ></GridCell>
-                  <GridCell
-                    title="Air Conditioners"
-                    imgURL={acImg}
-                    content={
-                      executionResult["carbonEmissionMetrics"][
-                        "air_conditioner_emission_equiv"
-                      ]
-                    }
-                  ></GridCell>
-                  <GridCell
-                    title="Trees"
-                    imgURL={treeImg}
-                    content={
-                      executionResult["carbonEmissionMetrics"][
-                        "tree_emission_equiv"
-                      ]
-                    }
-                  ></GridCell>
-                </GridRow>
-              </TitleGrid>
-            )}
+            <TitleGrid title="It resembles to...">
+              <GridRow>
+                <GridCell
+                  title="Cars"
+                  imgurl={carImg}
+                  content={
+                    executionResult["carbonEmissionMetrics"][
+                      "car_emission_equiv"
+                    ]
+                  }
+                ></GridCell>
+                <GridCell
+                  title="Phones"
+                  imgurl={phoneImg}
+                  content={
+                    executionResult["carbonEmissionMetrics"][
+                      "phone_emission_equiv"
+                    ]
+                  }
+                ></GridCell>
+                <GridCell
+                  title="Air Conditioners"
+                  imgurl={acImg}
+                  content={
+                    executionResult["carbonEmissionMetrics"][
+                      "air_conditioner_emission_equiv"
+                    ]
+                  }
+                ></GridCell>
+                <GridCell
+                  title="Trees"
+                  imgurl={treeImg}
+                  content={
+                    executionResult["carbonEmissionMetrics"][
+                      "tree_emission_equiv"
+                    ]
+                  }
+                ></GridCell>
+              </GridRow>
+            </TitleGrid>
+          )}
+          {!executionResult && (
+            <TitleGrid title="Results Not Available">
+            </TitleGrid>
+          )}
 
           <TitleGrid title="Extra Server Information">
             <GridRow>

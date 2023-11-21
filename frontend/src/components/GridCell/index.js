@@ -20,13 +20,13 @@ function GridCell(props) {
   const { sx, ...other } = props;
 
   return (
-    <div class="main-container">
-      <div class="upper-content">
+    <div className="main-container">
+      <div className="upper-content">
         <p>{props.title}</p>
       </div>
 
-      <div class="lower-content">
-        {props.imgURL !== undefined && <img src={props.imgURL} alt="Grid Cell" />}
+      <div className="lower-content">
+        {props.imgurl !== undefined && <img src={props.imgurl} alt="Grid Cell" />}
         <Box
           sx={{
             bgcolor: (theme) =>
