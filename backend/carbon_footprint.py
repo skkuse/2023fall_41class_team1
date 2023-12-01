@@ -3,7 +3,6 @@ import pandas as pd
 MEMORY_POWER=0.3725 # W/GB
 PUE = 1.67
 PSF = 1.0
-CARBON_INTENSITY = 500.0 # 500g? 0.5kg?
 
 SEC_PER_HOUR = 3600.0
 KILO = 1000.0
@@ -28,8 +27,12 @@ def get_carbon_footprint(java_execution_result, system_info):
     # energy_needed = runtime * (power_draw_for_cores * usage+  power_draw_for_memory) * PUE * PSF
 
 
-
+    
     tdp_data = pd.read_csv('./data/TDP_cpu.csv')
+    CI_data = pd.read_csv('./data/CI_aggregated.csv')
+    country = system_info['Country']
+    carbon_intensity = float((CI_data.query('index == @country')['in gCO2e/kWh']).values[0])
+    # CARBON_INTENSITY = 500.0 # 500g? 0.5kg?
 
     # 제 cpu가 목록에 없어서 임의로 넣어놨습니다
     # processor_name = system_info['Processor name']
@@ -41,7 +44,7 @@ def get_carbon_footprint(java_execution_result, system_info):
     n_cpu_cores = float(tdp_row['Unnamed: 2'].values[0])
     power_needed = PUE * n_cpu_cores * TDP_cpu * 1.0
     energy_needed = runtime * power_needed * PSF / KILO
-    carbon_footprint = energy_needed * CARBON_INTENSITY
+    carbon_footprint = energy_needed * carbon_intensity
     print("footprint : " + str(carbon_footprint))
     return carbon_footprint
 

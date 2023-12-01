@@ -14,7 +14,7 @@ def get_system_info():
     memory_info = psutil.virtual_memory()
 
     g = geocoder.ip('me')
-
+    
     return {
         "Processor name" : cpu_name,
         "Physical CPU cores": cpu_core_num,
