@@ -32,29 +32,6 @@ body {
   animation-iteration-count:initial;
 }
 
-/* .rowflex {
-  margin: 10px auto;
-  display: flex;
-} */
-
-/* .colelem-1 {
-  flex: 1;
-}
-
-.colelem-2 {
-  flex:2;
-}
-
-.colelem-3 {
-  flex:3;
-} */
-
-/* .colflex {
-  display: flex;
-  flex-direction: column;
-} */
-
-
 
 .tab {
   padding: 5px 20px;
@@ -72,25 +49,8 @@ body {
 }
 
 .tab:hover {
-  /*
-  background-color: rgb(131, 120, 237);
-  color: aliceblue;
-  */
   color: #1e6b7b;
 }
-
-/* .article {
-  color: black;
-  font-family: 'Ubuntu';
-  background-color: white;
-  background-color: rgba( 255, 255, 255, 0.5);
-  border: 2px solid black;
-  border-radius: 20px;
-  margin: 10px 5px;
-  padding: 10px;
-  width: 100%;
-  height: 100%;
-} */
 
 .green {
   color: green;
@@ -150,14 +110,6 @@ body {
   font-size: 25px;
 }
 
-/* #textbox {
-	padding: 10px;
-	border: solid 2px darkblue;
-	border-radius: 10px;
-	font-size: 15px;
-  font-family: 'Roboto';
-} */
-
 #server {
   font-family: 'Ubuntu';
   background-color: white;
@@ -172,10 +124,6 @@ body {
   float:left;
 }
 
-/* #server_info {
-  color: black;
-  font-size: 25px;
-} */
 
 #detail {
   font-size: 20px;
@@ -222,13 +170,6 @@ body {
 
 /* large devices */
 @media screen and (min-width: 1200px) {
-  /* nav ul{
-    flex-direction: row;
-  }
-
-  .flex {
-      flex-direction: row;
-  } */
 
   #result-panel{
     display: grid;
