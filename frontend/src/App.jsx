@@ -5,9 +5,6 @@ import GridCell from "components/GridCell";
 import MultiTabInput from "components/MultiTabInput";
 import GridRow from "components/GridRow";
 import TitleGrid from "components/TitleGrid";
-
-import { useMediaQuery } from "react-responsive";
-import { parseTabsToJson } from "utilities/Utilities";
 import { fetchServerInfo, getExecutionResult } from "utilities/serverRequests";
 
 import carImg from "assets/images/car.png";
