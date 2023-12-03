@@ -226,7 +226,7 @@ function App() {
           </TitleGrid>
 
           <TitleGrid title="Server Message">
-            <textarea id="server_message" readOnly></textarea>
+            <textarea id="server_message" value={ executionResult["output"]} readOnly ></textarea>
           </TitleGrid>
         </div>
       </div>

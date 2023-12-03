@@ -38,7 +38,7 @@ export const getExecutionResult = async (tabs) => {
         }
     
         const responseData = await response.json();
-
+        
         return responseData
         // setMessage(responseData.output);
         // setServerInfo(responseData.server_info);
