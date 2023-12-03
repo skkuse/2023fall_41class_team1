@@ -104,7 +104,7 @@ function App() {
               <GridRow>
                 <GridCell
                   title="Carbon Emission"
-                  content={executionResult["carbon_emission"].toFixed(6)}
+                  content={parseFloat(executionResult["carbon_emission"]).toFixed(6)}
                   unit="gCO2"
                 ></GridCell>
               </GridRow>
@@ -115,7 +115,7 @@ function App() {
                 ></GridCell>
                 <GridCell
                   title="Elapsed Time"
-                  content={executionResult["runtime"].toFixed(6)}
+                  content={parseFloat(executionResult["runtime"]).toFixed(6)}
                   unit="s"
                 ></GridCell>
               </GridRow>
