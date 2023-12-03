@@ -104,7 +104,8 @@ function App() {
               <GridRow>
                 <GridCell
                   title="Carbon Emission"
-                  content={executionResult["carbon_emission"]}
+                  content={executionResult["carbon_emission"].toFixed(6)}
+                  unit="gCO2"
                 ></GridCell>
               </GridRow>
               <GridRow>
@@ -114,7 +115,8 @@ function App() {
                 ></GridCell>
                 <GridCell
                   title="Elapsed Time"
-                  content={executionResult["runtime"]}
+                  content={executionResult["runtime"].toFixed(6)}
+                  unit="s"
                 ></GridCell>
               </GridRow>
             </TitleGrid>
@@ -128,40 +130,44 @@ function App() {
             <TitleGrid title="It resembles to...">
               <GridRow>
                 <GridCell
-                  title="Cars"
+                  title="A car travel"
                   imgurl={carImg}
                   content={
-                    executionResult["carbonEmissionMetrics"][
+                    (executionResult["carbonEmissionMetrics"][
                       "car_emission_equiv"
-                    ]
+                    ] * 1000).toFixed(6)
                   }
+                  unit="m"
                 ></GridCell>
                 <GridCell
-                  title="Phones"
+                  title="A phone charge"
                   imgurl={phoneImg}
                   content={
-                    executionResult["carbonEmissionMetrics"][
+                    (executionResult["carbonEmissionMetrics"][
                       "phone_emission_equiv"
-                    ]
+                    ] * 100).toFixed(6)
                   }
+                  unit="%"
                 ></GridCell>
                 <GridCell
-                  title="Air Conditioners"
+                  title="An air conditioner run"
                   imgurl={acImg}
                   content={
-                    executionResult["carbonEmissionMetrics"][
+                    (executionResult["carbonEmissionMetrics"][
                       "air_conditioner_emission_equiv"
-                    ]
+                    ] * 3600).toFixed(6)
                   }
+                  unit="s"
                 ></GridCell>
                 <GridCell
-                  title="Trees"
+                  title="A tree absorb carbon"
                   imgurl={treeImg}
                   content={
-                    executionResult["carbonEmissionMetrics"][
+                    (executionResult["carbonEmissionMetrics"][
                       "tree_emission_equiv"
-                    ]
+                    ] * 30 * 24 * 3600).toFixed(6)
                   }
+                  unit="s"
                 ></GridCell>
               </GridRow>
             </TitleGrid>
@@ -188,6 +194,7 @@ function App() {
               <GridCell
                 title="Maximum CPU frequency"
                 content={serverInfo ? serverInfo["Maximum CPU frequency"] : "-"}
+                unit="MHz"
               ></GridCell>
               <GridCell
                 title="Total memory"
@@ -196,6 +203,7 @@ function App() {
                     ? parseFloat(serverInfo["Total memory"]).toFixed(2)
                     : "-"
                 }
+                unit="GiB"
               ></GridCell>
               <GridCell
                 title="Available memory"
@@ -204,6 +212,7 @@ function App() {
                     ? parseFloat(serverInfo["Available memory"]).toFixed(2)
                     : "-"
                 }
+                unit="GiB"
               ></GridCell>
             </GridRow>
             <GridRow>
