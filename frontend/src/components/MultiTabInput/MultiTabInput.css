@@ -48,11 +48,6 @@
 }
 
 .tab.active {
-    /*
-    background-color: rgb(131, 120, 237);
-    border-bottom-color: transparent;
-    color: aliceblue;
-    */
     border: 3px solid #C0C0C0;
     color: #000080;
 }
@@ -73,30 +68,11 @@
     
 }
 
-.button {
-    /*
-    color: black;
-    background-color: transparent;
-    padding: 0.05rem 0.1rem;
-    border-radius: 0.5rem;
-    border: 0.15rem solid #000080;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    */
-    border: none;
-    padding: 15px 30px;
-    border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.25s;
-}
-
 button{
     border: 0.13rem solid black;
     padding: 5px;
     border-radius: 15px;
-    font-size: 15px;
+   font-size: 15px;
 }
   
 button:hover {
