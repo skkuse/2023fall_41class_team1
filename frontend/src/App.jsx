@@ -93,7 +93,7 @@ function App() {
             handleTabsChange={handleTabsChange}
             className="custom-tab"
           ></MultiTabInput>
-          <Button class="tab" onClick={onExecute}>
+          <Button class="tab" id="compile_button" onClick={onExecute}>
             Compile
           </Button>
         </nav>
