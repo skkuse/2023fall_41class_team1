@@ -1,11 +1,8 @@
 import pandas as pd
+from constants import KILO, SEC_PER_HOUR
 
-MEMORY_POWER=0.3725 # W/GB
 PUE = 1.67
 PSF = 1.0
-
-SEC_PER_HOUR = 3600.0
-KILO = 1000.0
 
 # power_draw_for_cores, usage만 구하면 됨
 def get_carbon_footprint(java_execution_result, system_info):

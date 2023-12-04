@@ -1,12 +1,11 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.routing import APIRoute
-from middleware_config import add_middleware
-from pydantic import BaseModel
-from typing import Dict
+from fastapi import FastAPI
+from app.middleware_config import add_middleware
 
-from java_executor import execute_java_code
-from system_info import get_system_info
-from carbon_footprint import get_carbon_footprint, emission_converter
+from app.models.java_code import JavaCode
+
+from app.services.java_executor import execute_java_code
+from app.services.system_info import get_system_info
+from app.services.carbon_footprint import get_carbon_footprint, emission_converter
 
 app = FastAPI()
 
@@ -14,9 +13,6 @@ add_middleware(app)
 
 system_info = get_system_info()
 
-
-class JavaCode(BaseModel):
-    java_code: Dict[str, str]
 
 
 @app.get("/")

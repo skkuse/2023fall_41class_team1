@@ -3,6 +3,7 @@ import os
 import re
 import time
 
+from constants import TIMEOUT
 
 def execute_java_code(java_codes: dict):
     try:
@@ -43,7 +44,7 @@ def execute_java_code(java_codes: dict):
         try:
             execute_result = subprocess.run(
                 ['java', '-Xint', main_class_name],
-                capture_output=True, text=True, timeout=10)  # Set timeout to 10 seconds
+                capture_output=True, text=True, timeout=TIMEOUT)  # Set timeout to 10 seconds
         except subprocess.TimeoutExpired:
             delete_java_files(file_names, class_names)
             return {"status": "Failed", "error": "The Java program execution exceeded the time limit of 10 seconds and was terminated."}

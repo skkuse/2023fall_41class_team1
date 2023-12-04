@@ -2,7 +2,7 @@ import psutil
 import geocoder
 import cpuinfo
 
-GIGA = 1024*1024*1024
+from constants import GIGA
 
 def get_system_info():
 
