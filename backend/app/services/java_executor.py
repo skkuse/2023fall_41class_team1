@@ -15,7 +15,7 @@ def delete_java_files(file_names, class_names):
 def compile_java_files(file_names, class_names):
     for file_name in file_names:
         compile_result = subprocess.run(
-            ['javac', file_name], capture_output=True, text=True)
+            ['javac', '-encoding', 'UTF-8', file_name], capture_output=True, text=True)
         print(compile_result)
         if compile_result.returncode != 0:
             # delete_java_files(file_names, class_names)
@@ -25,7 +25,7 @@ def compile_java_files(file_names, class_names):
 
 def find_main_class(class_names):
     for class_name in class_names:
-        with open(f"{class_name}.java", 'r') as file:
+        with open(f"{class_name}.java", 'r', encoding='utf-8') as file:
             if "public static void main(String[] args)" in file.read():
                 return class_name
     raise FileNotFoundError("No class with a main method found")
@@ -33,9 +33,9 @@ def find_main_class(class_names):
 
 def execute_java_code(java_codes: dict):
     ret = {"status":"init"}
-    start_time=0
-    end_time=0
-    runtime=0
+    start_time = 0
+    end_time = 0
+    runtime = 0
     try:
         file_names, class_names = prepare_java_files(java_codes)
         compile_java_files(file_names, class_names)
@@ -43,12 +43,12 @@ def execute_java_code(java_codes: dict):
 
         start_time = time.perf_counter()
         execute_result = subprocess.run(
-            ['java', main_class_name], capture_output=True, text=True, timeout=TIMEOUT)
+            ['java', '-Dfile.encoding=UTF-8', main_class_name], capture_output=True, text=True, timeout=TIMEOUT)
         end_time = time.perf_counter()
         runtime = end_time - start_time
         if execute_result.returncode != 0:
             delete_java_files(file_names, class_names)
-            ret =  {"status": "RuntimeFailed", "error": execute_result.stderr}
+            ret = {"status": "RuntimeFailed", "error": execute_result.stderr}
     except subprocess.TimeoutExpired:
         delete_java_files(file_names, class_names)
         ret = {"status": "TimeoutFailed", "error": "Execution time exceeded the limit"}
@@ -71,13 +71,17 @@ def prepare_java_files(java_codes: dict):
     class_names = []
     for key in java_codes:
         match = re.search(r'public\s+class\s+(\w+)', java_codes[key])
-        class_name = match.group(1)
-        file_name = f"{class_name}.java"
-        file_names.append(file_name)
-        class_names.append(class_name)
-        with open(file_name, 'w') as file:
-            file.write(java_codes[key])
+        if match:
+            class_name = match.group(1)
+            file_name = f"{class_name}.java"
+            file_names.append(file_name)
+            class_names.append(class_name)
+            with open(file_name, 'w', encoding='utf-8') as file:  # UTF-8 인코딩 지정
+                file.write(java_codes[key])
+        else:
+            raise ValueError(f"Invalid Java code: {java_codes[key]}")
     return file_names, class_names
+
 
 
 java_codes_example = {
