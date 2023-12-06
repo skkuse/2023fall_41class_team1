@@ -1,0 +1,1021 @@
+﻿"public class Main {
+    public static int before_fun() {
+        int sum = 0;
+        for (long i = 0; i < 100000; i++) {
+            sum++;
+        }
+        return sum;
+    }
+    
+	public static void main(String[] args) {
+		before_fun();
+
+	}
+}","public class Main {
+    public static int after_fun() {
+        int sum = 0;
+        for (int i = 0; i < 100000; i++) {
+            sum++;
+        }
+        return sum;
+    }
+    
+	public static void main(String[] args) {
+		after_fun();
+
+	}
+}"
+"public class MainClass {
+
+    public static void main(String[] args) {
+        String[] inputs = {""a"", ""b"", ""c"", ""d""};
+        for (int i = 0; i < 10000000; i++) {
+            for (String input : inputs) {
+                if (input.equals(""a"")) {
+                    int temp = 0;
+                }
+            }
+        }
+    }
+}","public class MainClass {
+
+    public static void main(String[] args) {
+        char[] inputs = {'a', 'b', 'c', 'd'};
+        for (int i = 0; i < 10000000; i++) {
+            for (char input : inputs) {
+                if (input == 'a') {
+                    int temp = 0;
+                }
+            }
+        }
+    }
+}"
+"public class HelloWorld {
+    public static void main(String[] args) {
+        Long sum = 0L;
+        for (long i = 0; i <= Integer.MAX_VALUE / 5; i++) {
+            sum += i;
+        }
+    }
+}","public class HelloWorld {
+    public static void main(String[] args) {
+        long sum = 0L;
+        for (long i = 0; i <= Integer.MAX_VALUE / 5; i++) {
+            sum += i;
+        }
+    }
+}"
+"import java.util.Objects;
+
+public class MainClass {
+
+    public static void main(String[] args) {        
+        double result = 0;
+        for (int i = 0; i < 10000000; i++) {
+            result = sum(1.0D, 2.0D); 
+        }
+    }
+
+    public static double sum(Double value1, Double value2) {
+        double double1 = Objects.isNull(value1) ? 0.0D : value1;
+        double double2 = Objects.isNull(value2) ? 0.0D : value2;
+        return double1 + double2;
+    }
+}","public class MainClass {
+
+    public static void main(String[] args) {        
+        double result = 0;
+        for (int i = 0; i < 10000000; i++) {
+            result = sum(1.0D, 2.0D); 
+        }
+    }
+
+    public static double sum(double value1, double value2) {
+        return value1 + value2;
+    }
+}"
+"import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+
+    public static void main(String[] args) {
+        int iterations = 10000;
+
+        for (int i = 0; i < iterations; i++) {
+            keySetIteration();
+        }
+
+    }
+
+    public static void keySetIteration() {
+        var someMap = new HashMap<Integer, Integer>();
+
+        for (var i = 0; i < 1000; i++) {
+            someMap.put(i, i);
+        }
+
+        var sum = 0;
+        for (Integer key : someMap.keySet()) {
+            sum += key;
+            sum += someMap.get(key);
+        }
+    }
+
+}","import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+
+    public static void main(String[] args) {
+        int iterations = 10000;
+  
+        for (int i = 0; i < iterations; i++) {
+            entrySetIteration();
+        }
+
+    }
+
+    public static void entrySetIteration() {
+        var someMap = new HashMap<Integer, Integer>();
+
+        for (var i = 0; i < 1000; i++) {
+            someMap.put(i, i);
+        }
+
+        var sum = 0;
+        for (Map.Entry<Integer, Integer> entry : someMap.entrySet()) {
+            sum += entry.getKey();
+            sum += entry.getValue();
+        }
+    }
+}"
+"import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Main {
+    public static void before_fun() {
+    Random random = new Random();
+    int randomNumber = random.nextInt(100);
+}
+    public static void main(String[] args) {
+		for (int i = 0; i < 1000000; i++) {
+		    before_fun();
+		}
+   }
+}","import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Main {
+    public static void after_fun() {
+          int randomNumber = ThreadLocalRandom.current().nextInt(100);
+    }
+    
+	public static void main(String[] args) {
+		for (int i = 0; i < 1000000; i++) {
+		    after_fun();
+		}
+    }
+}"
+"import java.util.ArrayList;
+import java.util.List;
+
+public class MainClass {
+
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add(""AA"");
+        list.add(""BB"");
+        list.add(""CC"");
+        list.add(""DD"");
+        list.add(""EE"");
+        list.add(""FF"");
+        list.add(""GG"");
+        list.add(""HH"");
+        list.add(""II"");
+        list.add(""JJ"");
+
+        for (int i = 0; i < 100000; i++) {
+            boolean exists = list.contains(""CC"");
+        }
+    }
+}","import java.util.HashSet;
+import java.util.Set;
+
+public class MainClass {
+
+    public static void main(String[] args) {
+        Set<String> set = new HashSet<>();
+        set.add(""AA"");
+        set.add(""BB"");
+        set.add(""CC"");
+        set.add(""DD"");
+        set.add(""EE"");
+        set.add(""FF"");
+        set.add(""GG"");
+        set.add(""HH"");
+        set.add(""II"");
+        set.add(""JJ"");
+        for (int i = 0; i < 100000; i++) {
+            boolean exists = set.contains(""CC""); 
+        }
+    }
+}"
+"public class MainClass {
+    public static void main(String[] args) {
+        for (int i = 0; i < 10000000; i++) {
+            String s = new String(""Hello, world!""); // Before, it assigns a string with new String class
+        }
+    }
+}","public class MainClass {
+    public static void main(String[] args) {
+        for (int i = 0; i < 10000000; i++) {
+            String s = ""Hello, world!""; // After, it assigns a string with literals
+        }
+    }
+}"
+"import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class MainClass {
+
+    private static final Map<String, Integer> CONSTANTS_MAP;
+
+    static {
+        CONSTANTS_MAP = new ConcurrentHashMap<>();
+        CONSTANTS_MAP.put(""FIRST"", 1);
+        CONSTANTS_MAP.put(""SECOND"", 2);
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10000000; i++) {
+            Integer value = CONSTANTS_MAP.get(""FIRST"");
+        }
+    }
+}","import java.util.Map;
+import java.util.HashMap;
+
+public class MainClass {
+    private static final Map<String, Integer> CONSTANTS_MAP;
+
+    static {
+        CONSTANTS_MAP = new HashMap<>();
+        CONSTANTS_MAP.put(""FIRST"", 1);
+        CONSTANTS_MAP.put(""SECOND"", 2);
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10000000; i++) {
+            Integer value = CONSTANTS_MAP.get(""FIRST"");
+        }
+    }
+}"
+"import java.util.List;
+import java.util.ArrayList;
+
+public class Test {
+    public static List<String> listempty() {
+            return new ArrayList<>(); 
+        }
+
+    public static void main(String[] args) {
+        for (int i = 0 ; i < 1000000; i++) {
+            listempty();
+        }
+    }
+}","import java.util.List;
+import java.util.ArrayList;
+
+public class Test {
+    public static List<String> listempty() {
+            return null;
+        }
+
+    public static void main(String[] args) {
+        for (int i = 0 ; i < 1000000; i++) {
+            listempty();
+        }
+    }
+}"
+"public class MainClass {
+    public static void main(String[] args) {
+        for (int i = 0; i < 500000; i++) {
+            try {
+                SubClass temp = (SubClass) Class.forName(""SubClass"").newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class SubClass {
+}","public class MainClass {
+    public static void main(String[] args) {
+        for (int i = 0; i < 500000; i++) {
+            try {
+                SubClass temp = new SubClass();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class SubClass {
+}"
+"import java.util.ArrayList;
+import java.util.List;
+
+public class MainClass {
+    // Assuming UserDO is a defined class and userDAO is an accessible object with the required methods.
+    static boolean isAll = false; // Example definition
+    static UserDAO userDAO = new UserDAO(); // Example definition
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 50000000; i++) {
+            List<UserDO> userList = new ArrayList<>();
+            if (isAll) {
+                userList = userDAO.queryAll();
+            } else {
+                userList = userDAO.queryActive();
+            }
+            // Presumably do something with userList here
+        }
+    }
+}
+
+class UserDO {
+    // Details of UserDO class
+}
+
+class UserDAO {
+    public List<UserDO> queryAll() {
+        // Implementation of querying all users
+        return new ArrayList<>();
+    }
+    
+    public List<UserDO> queryActive() {
+        // Implementation of querying active users
+        return new ArrayList<>();
+    }
+}","import java.util.ArrayList;
+import java.util.List;
+
+public class MainClass {
+    // Assuming UserDO is a defined class and userDAO is an accessible object with the required methods.
+    static boolean isAll = false; // Example definition
+    static UserDAO userDAO = new UserDAO(); // Example definition
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 50000000; i++) {
+            List<UserDO> userList;
+            if (isAll) {
+                userList = userDAO.queryAll();
+            } else {
+                userList = userDAO.queryActive();
+            }
+            // Presumably do something with userList here
+        }
+    }
+}
+
+class UserDO {
+    // Details of UserDO class
+}
+
+class UserDAO {
+    public List<UserDO> queryAll() {
+        // Implementation of querying all users
+        return new ArrayList<>();
+    }
+    
+    public List<UserDO> queryActive() {
+        // Implementation of querying active users
+        return new ArrayList<>();
+    }
+}"
+"public class MainClass {
+
+    public static void main(String[] args) {
+        int number = 777;
+        boolean flag = true;
+        for (int i = 0; i < 1000000; i++) {
+            String numberString = """" + number; 
+            String booleanString = """" + flag;  
+        }
+    }
+}","public class MainClass {
+
+    public static void main(String[] args) {
+        int number = 777;
+        boolean flag = true;
+        for (int i = 0; i < 1000000; i++) {
+            String numberString = String.valueOf(number); 
+            String booleanString = String.valueOf(flag); 
+        }
+    }
+}"
+"public class Main
+{
+    public static int before_func(){
+        int count = 0;
+        for (int i = 0; i < 100000; i++){
+            if ((i % 2) == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+	public static void main(String[] args) {
+		before_func();
+	}
+}","public class Main {
+    public static int after_func() {
+        int count = 0;
+        for (int i = 0; i < 100000; i++) {
+            if ((i & 1) == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+	public static void main(String[] args) {
+		after_func();
+	}
+}"
+"public class Main {
+    public static int before_fun() {
+        int count = 0;
+        for (int i = 0; i < 100000; i++) {
+            count = i * 2;
+        }
+        return count;
+    }
+    
+	public static void main(String[] args) {
+		before_fun();
+	}
+}","public class Main {
+    public static int after_fun() {
+        int count=0;
+        for (int i = 0; i < 100000; i++) {
+            count = i << 1;
+        }
+        return count;
+    }
+    
+	public static void main(String[] args) {
+		after_fun();
+	}
+}"
+"public class MainClass {
+
+    public static void main(String[] args) {
+        int a = 10;
+        for (int i = 0; i < 100000000; i++) {
+            if (!(a >= 10)) {
+                int temp = 0;
+            } else {
+                int temp = 1;
+            }
+        }
+    }
+}","public class MainClass {
+
+    public static void main(String[] args) {
+	  int a = 10;
+        for (int i = 0; i < 100000000; i++) {
+            if (a < 10) {
+                int temp = 0;
+            } else {
+                int temp = 1;
+            }
+        }
+    }
+}"
+"import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+    public static void before_fun() {
+        int result = addNumbers(3, 4);
+    }
+
+    private static int addNumbers(int a, int b) {
+        return a + b;
+    }
+    
+	public static void main(String[] args) {
+		for (int i = 0; i < 1000000; i++){
+		    before_fun();
+		}
+    }
+}","import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+    public static void after_fun() {
+	    int result = (3 + 4);
+    }
+	public static void main(String[] args) {
+		for (int i = 0; i < 1000000; i++){
+		    after_fun();
+		}
+    }
+}"
+"public class MainClass {
+
+    public static void main(String[] args) {
+        int[] srcArray = new int[10000000]; 
+
+        for (int i = 0; i < 10000000; i++) {
+            srcArray[i] = i + 1;
+        }
+        int[] destArray = new int[srcArray.length];
+        for (int i = 0; i < srcArray.length; i++) {
+            destArray[i] = srcArray[i]; 
+        }
+    }
+}","public class MainClass {
+
+    public static void main(String[] args) {
+        int[] srcArray = new int[10000000]; 
+
+        for (int i = 0; i < 10000000; i++) {
+            srcArray[i] = i + 1;
+        }
+
+        int[] destArray = new int[srcArray.length];
+        System.arraycopy(srcArray, 0, destArray, 0, srcArray.length);
+
+    }
+}"
+"import java.util.ArrayList;
+import java.util.List;
+
+public class MainClass {
+
+    public static void main(String[] args) {
+        String[] array = {""AA"", ""BB"", ""CC"", ""DD"", ""EE"", ""AA"", ""BB"", ""CC"", ""DD"", ""EE""};
+        for (int i = 0; i < 1000000; i++) {
+            List<String> list = new ArrayList<>();
+            for (String item : array) {
+                list.add(item);
+            }
+        }
+    }
+}","import java.util.List;
+import java.util.Arrays;
+
+public class MainClass {
+
+    public static void main(String[] args) {
+        String[] array = {""AA"", ""BB"", ""CC"", ""DD"", ""EE"", ""AA"", ""BB"", ""CC"", ""DD"", ""EE""};
+        for (int i = 0; i < 1000000; i++) {
+            List<String> list = Arrays.asList(array);
+        }
+    }
+}"
+"import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Pattern {
+	
+	private static final int ITERATIONS = 100000;
+	
+	public static void main(String[] args) {
+
+		for (int iteration = 0; iteration < ITERATIONS; iteration++) {
+			usingAdd();
+		}
+	}
+	
+	public static ArrayList<Integer> usingAdd() {
+		var arr = new ArrayList<Integer>();
+		for (var i = 0; i < 1000; i++) {
+			
+			arr.add(i);
+		}
+		return arr;
+	}
+}","import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Pattern {
+	
+	private static final int ITERATIONS = 100000;
+	
+	public static void main(String[] args) {
+
+		for (int iteration = 0; iteration < ITERATIONS; iteration++)        {
+			usingAddAll();
+		}
+	}
+	
+	public static ArrayList<Integer> usingAddAll() {
+		var arr = new ArrayList<Integer>();
+		
+		arr.addAll(Arrays.asList(new Integer[1000]));
+		return arr;
+	}
+}"
+"import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class Pattern {
+	
+	private static final int ITERATIONS = 100000;
+	
+	public static void main(String[] args) {
+
+		for (int iteration = 0; iteration < ITERATIONS; iteration++) {
+			createListUsingArrayList();
+		}
+	}
+	public static List<String> createListUsingArrayList() {
+		
+		return new ArrayList<>(Arrays.asList(""S""));
+	}
+}","import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class Pattern {
+	
+	private static final int ITERATIONS = 100000;
+	
+	public static void main(String[] args) {
+
+		for (int iteration = 0; iteration < ITERATIONS; iteration++) {
+			createListUsingSingleton();
+		}
+	}
+	public static List<String> createListUsingSingleton() {
+		
+		return Collections.singletonList(""S"");
+	}
+}"
+"public class Main {
+    public static int before_fun() {
+        int sum = 0;
+        for (long i = 0; i < 50000000; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+    
+	public static void main(String[] args) {
+		before_fun();
+	}
+}","public class Main
+{
+    public static int after_fun() {
+        int sum = 0;
+        for (int i = 0; i < 50000000; i += 3) {
+            sum += (i + i + 1 + i + 2);
+        }
+        return sum;
+    }
+    
+	public static void main(String[] args) {
+		after_fun();
+	}
+}"
+"public class Main {
+    public static int before_fun() {
+        int count = 0;
+        for (int i = 0; i < 100000; i++) {
+            if ((i % 2 == 0) && (i % 11 == 0)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+	public static void main(String[] args) {
+		before_fun();
+	}
+}","public class Main {
+    public static int after_fun() {
+        int count = 0;
+        for (int i = 0; i < 100000; i++) {
+            if ((i % 11 == 0) && (i % 2 == 0)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+	public static void main(String[] args) {
+		after_fun();
+	}
+}"
+"public class Pattern {
+	private static int p_1(int n) {
+		int result = 0;
+		
+		for (int i = 1; i <= n; i++) {
+			result += i;
+		}
+		return result;
+	}
+
+	public static void main(String[] args) {
+		int n = 10000;
+		int result = p_1(n);
+	}
+}","public class Pattern {
+	private static int p_2(int n) {
+		
+		return n * (n + 1) / 2;
+   }
+
+	public static void main(String[] args) {
+		int n = 10000;
+		int result = p_2(n);
+	}
+}"
+"public class MainClass {
+    public static void main(String[] args) {
+        for (int i = 0; i < 50000000; i++) {
+            SubClass temp = SubClass.createInstance();
+        }
+    }
+}
+
+class SubClass {
+    public static SubClass createInstance() {
+        return new SubClass();
+    }
+}","public class MainClass {
+    public static void main(String[] args) {
+        for(int i = 0; i < 50000000; i++) {
+            SubClass temp = new SubClass();
+        }
+    }
+}
+
+class SubClass {
+    public static SubClass createInstance() {
+        return new SubClass();
+    }
+}"
+"public class MainClass {
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 1000000; i++) {
+            StringBuilder buffer = new StringBuilder();
+            buffer.append(""some data"").append(i);
+        }
+    }
+}","public class MainClass {
+
+    public static void main(String[] args) {
+        StringBuilder buffer = new StringBuilder(); 
+
+        for (int i = 0; i < 1000000; i++) {			
+            buffer.setLength(0);
+            buffer.append(""some data"").append(i);
+        }
+    }
+
+}"
+"public class Fibonacci {
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        } else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+    public static void main(String[] args) {
+        int n = 35; 
+        fibonacci(n);
+    }
+}","public class Fibonacci {
+    public static int[] cache = new int[36];
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        if(cache[n] != -1)
+            return cache[n];
+        int[] fib = new int[n + 1];
+        fib[0] = 0;
+        fib[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+        cache[n] = fib[n];
+        return fib[n];
+    }
+    public static void main(String[] args) {
+        int n = 35;
+        for (int i = 0; i <= n; i++) {
+            cache[i] = -1;
+        }
+        fibonacci(n);
+    }
+}"
+"public class TailRecursionExample {
+
+    public static void main(String[] args) {
+        int number = 5;
+        for (int i = 0; i < 5000000; i++){
+            factorial(number, 1);
+        }
+    }
+
+    public static int factorial(int n, int result) {
+        if (n == 0) {
+            return result;
+        }
+        return factorial(n - 1, n * result);
+    }
+}","public class NonTailRecursionExample {
+
+    public static void main(String[] args) {
+        int number = 5;
+        for(int i = 0; i < 5000000; i++){
+            factorial(number);
+        }
+    }
+
+    public static int factorial(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        return n * factorial(n - 1);
+    }
+}"
+"public class SumSingleThread {
+    public static long sum(int[] array) {
+        long total = 0;
+        for (int value : array) {
+            total += value;
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+
+        int[] numbers = new int[10000000];
+	  for (int i = 0; i < 10000000; i++) {
+		numbers[i] = i;
+        }
+        long total = sum(numbers);
+    }
+}","import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+public class SumMultiThread {
+    public static long parallelSum(int[] array) throws Exception {
+        int numberOfThreads = Runtime.getRuntime().availableProcessors();
+        ExecutorService service = Executors.newFixedThreadPool(numberOfThreads);
+
+ 
+        Future<Long>[] futures = new Future[numberOfThreads];
+        int partSize = array.length / numberOfThreads;
+
+        for (int i = 0; i < numberOfThreads; i++) {
+            final int start = partSize * i;
+            final int end = (i == numberOfThreads - 1) ? array.length : start + partSize;
+            futures[i] = service.submit(() -> {
+                long sum = 0;
+                for (int j = start; j < end; j++) {
+                    sum += array[j];
+                }
+                return sum;
+            });
+        }
+
+        long total = 0;
+        for (Future<Long> future : futures) {
+            total += future.get();
+        }
+
+        service.shutdown();
+        service.awaitTermination(1, TimeUnit.MINUTES);
+        return total;
+    }
+
+    public static void main(String[] args) throws Exception {
+        int[] numbers = new int[10000000];
+	  for (int i = 0; i < 10000000; i++) {
+		numbers[i] = i;
+	  }
+        long total = parallelSum(numbers);
+    }
+}"
+"import java.util.ArrayList;
+import java.util.List;
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        String[] li = new String[100000];
+        for (int i = 0; i < 100000; i++) {
+            li[i] = ""haha"";
+        }
+
+        try {
+            int i = 0;
+            while (true) {
+                li[i++].toUpperCase();
+		}
+        } catch (ArrayIndexOutOfBoundsException e) {
+		// Before, it utilizes exceptions to break a while loop
+        }
+    }
+}","import java.util.ArrayList;
+import java.util.List;
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        String[] li = new String[100000];
+        for (int i = 0; i < 100000; i++) { // After, for loop automatically breaks a loop
+            li[i] = ""haha"";
+        }
+
+        for (String s : li) {
+            s = ""haha"";
+        }
+    }
+}"
+"public class MainClass {
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 1000000; i++) {
+            int result = addOne(i);
+            result = multiplyByTwo(result);
+            useResult(result);
+        }
+    }
+
+    private static int addOne(int number) {
+        return number + 1;
+    }
+
+    private static int multiplyByTwo(int number) {
+        return number * 2;
+    }
+
+    private static void useResult(int result) {
+        int temp = result + 1;
+    }
+}","public class MainClass {
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 1000000; i++) {
+            int result = (i + 1) * 2;
+            useResult(result);
+        }
+    }
+
+    private static void useResult(int result) {
+        int temp = result + 1;
+    }
+}"
+"public class MainClass {
+    public static void main(String[] args) {
+        for(int i = 0; i < 50000000; i++) {
+            Singleton singleton = Singleton.getInstance();
+        }
+    }
+}
+class Singleton {
+    private static Singleton instance;
+    public static synchronized Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}","public class MainClass {
+    public static void main(String[] args) {
+        for (int i = 0; i < 50000000; i++) {
+            Singleton singleton = Singleton.getInstance();
+        }
+    }
+}
+class Singleton {
+    private static class Holder {
+        static final Singleton INSTANCE = new Singleton();
+    }
+    public static Singleton getInstance() {
+        return Holder.INSTANCE;
+    }
+}"
