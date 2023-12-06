@@ -23,10 +23,6 @@ def test():
 
 @app.post("/execute_java_code/")
 async def execute_code(payload: JavaCode):
-  korean_regex = '[\uAC00-\uD7AF]'
-  java_codes = payload.java_code
-  for key in java_codes:
-    java_codes[key]= re.sub(korean_regex, '', java_codes[key])
 
   try:
     java_execution_result = execute_java_code(payload.java_code)
