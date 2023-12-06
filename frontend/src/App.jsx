@@ -14,7 +14,7 @@ import treeImg from "assets/images/tree.png";
 
 function App() {
   const [tabs, setTabs] = useState([{ id: 1, javaCode: "" }]);
-
+  const [isReady, setIsReady] = useState(true);
   // const [javaCode, setJavaCode] = useState(`public class TempJava {
   //   public static void main(String[] args) {
   //       System.out.println("Hello from Java!");
@@ -63,16 +63,34 @@ function App() {
 
   const onExecute = async () => {
     try {
+      setIsReady(false);
       const result = await getExecutionResult(tabs);
-      console.log(result);
-      if (result.status === "Failed") {
-        alert("컴파일중 오류가 발생했습니다. 코드를 다시 입력해주세요.\n에러 메시지 : " + result.detail)
-        return;
-      } else {
-        setExecutionResult(result);
+      console.log(result)
+      switch (result.status) {
+        case "Success":
+          setExecutionResult(result);
+          break;
+        case "Failed":
+          alert(
+            `컴파일 중 오류가 발생했습니다. 코드를 다시 입력해주세요.\n에러 메시지: ${result.detail}`
+          );
+          break;
+        case "RuntimeFailed":
+          alert(
+            `실행 중 오류가 발생했습니다. 코드를 다시 입력해주세요.\n에러 메시지: ${result.detail}`
+          );
+          break;
+        case "TimeoutFailed":
+          alert("실행 시간이 초과되었습니다. 코드를 다시 확인해주세요.");
+          break;
+        default:
+          alert("알 수 없는 오류가 발생했습니다.");
       }
     } catch (error) {
       console.error("Error in execution:", error);
+      alert("실행 중 오류가 발생했습니다.");
+    } finally {
+      setIsReady(true);
     }
   };
 
@@ -93,7 +111,12 @@ function App() {
             handleTabsChange={handleTabsChange}
             className="custom-tab"
           ></MultiTabInput>
-          <Button class="tab" id="compile_button" onClick={onExecute}>
+          <Button
+            variant="contained"
+            id="compile_button"
+            onClick={onExecute}
+            disabled={!isReady}
+          >
             Compile
           </Button>
         </nav>
@@ -104,7 +127,9 @@ function App() {
               <GridRow>
                 <GridCell
                   title="Carbon Emission"
-                  content={parseFloat(executionResult["carbon_emission"]).toFixed(6)}
+                  content={parseFloat(
+                    executionResult["carbon_emission"]
+                  ).toFixed(6)}
                   unit="gCO2"
                 ></GridCell>
               </GridRow>
@@ -122,8 +147,7 @@ function App() {
             </TitleGrid>
           )}
           {!executionResult && (
-            <TitleGrid title="Results Not Available">
-            </TitleGrid>
+            <TitleGrid title="Results Not Available"></TitleGrid>
           )}
 
           {executionResult && (
@@ -132,49 +156,51 @@ function App() {
                 <GridCell
                   title="A car travel"
                   imgurl={carImg}
-                  content={
-                    (executionResult["carbonEmissionMetrics"][
+                  content={(
+                    executionResult["carbonEmissionMetrics"][
                       "car_emission_equiv"
-                    ] * 1000).toFixed(6)
-                  }
+                    ] * 1000
+                  ).toFixed(6)}
                   unit="m"
                 ></GridCell>
                 <GridCell
                   title="A phone charge"
                   imgurl={phoneImg}
-                  content={
-                    (executionResult["carbonEmissionMetrics"][
+                  content={(
+                    executionResult["carbonEmissionMetrics"][
                       "phone_emission_equiv"
-                    ] * 100).toFixed(6)
-                  }
+                    ] * 100
+                  ).toFixed(6)}
                   unit="%"
                 ></GridCell>
                 <GridCell
                   title="An air conditioner run"
                   imgurl={acImg}
-                  content={
-                    (executionResult["carbonEmissionMetrics"][
+                  content={(
+                    executionResult["carbonEmissionMetrics"][
                       "air_conditioner_emission_equiv"
-                    ] * 3600).toFixed(6)
-                  }
+                    ] * 3600
+                  ).toFixed(6)}
                   unit="s"
                 ></GridCell>
                 <GridCell
                   title="A tree absorb carbon"
                   imgurl={treeImg}
-                  content={
-                    (executionResult["carbonEmissionMetrics"][
+                  content={(
+                    executionResult["carbonEmissionMetrics"][
                       "tree_emission_equiv"
-                    ] * 30 * 24 * 3600).toFixed(6)
-                  }
+                    ] *
+                    30 *
+                    24 *
+                    3600
+                  ).toFixed(6)}
                   unit="s"
                 ></GridCell>
               </GridRow>
             </TitleGrid>
           )}
           {!executionResult && (
-            <TitleGrid title="Results Not Available">
-            </TitleGrid>
+            <TitleGrid title="Results Not Available"></TitleGrid>
           )}
 
           <TitleGrid title="Extra Server Information">
@@ -232,7 +258,11 @@ function App() {
           </TitleGrid>
 
           <TitleGrid title="Server Message">
-            <textarea id="server_message" value={ executionResult["output"]} readOnly ></textarea>
+            <textarea
+              id="server_message"
+              value={executionResult["output"]}
+              readOnly
+            ></textarea>
           </TitleGrid>
         </div>
       </div>
