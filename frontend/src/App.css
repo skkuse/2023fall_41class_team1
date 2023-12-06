@@ -1,0 +1,170 @@
+.App {
+  text-align: center;
+  font-size: 16px; /* 추후 Website의 Accessibility를 위해 root font size 지정 */
+}
+
+* {  
+  margin:0;  /* 브라우저 기본 마진 리셋 */
+  padding:0;  /* 브라우저 기본 패딩 리셋 */
+  box-sizing: border-box;  /* 테두리까지 포함해서 박스 모델 너비로 계산 */
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(Ubuntu-Medium.ttf);
+}
+
+
+body {
+  height: 100%;
+  width: 100%;
+  background: url(/src/assets/images/polarbear1.jpg) no-repeat center fixed;
+  /* polarber 0~10 이미지출처 : https://www.shutterstock.com/ko */
+  background-size: cover;
+
+  /* 페이지 로딩 애니메이션 추가 */
+  animation-duration: 1s;
+  animation-name: slide_up;
+  animation-iteration-count:initial;
+}
+
+
+.tab {
+  padding: 5px 20px;
+  border-radius: 1rem;
+  margin-right: 5px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.7s;
+  font-size: 17px;
+  text-align: center;
+}
+
+.tab.active {
+  background-color: #C0C0C0	;
+}
+
+.tab:hover {
+  color: #1e6b7b;
+}
+
+
+#container-narrow {
+  width: 90%;
+  height: 100%;
+  margin: 20px auto;
+}
+
+#container-wide {
+  width: 90%;
+  height: 100%;
+  margin: 20px auto;
+}
+
+#title {
+  color: black;
+  font-family: 'Ubuntu';
+  font-size: 35px;
+  background-color: white;
+  background-color: rgba( 255, 255, 255, 0.5 );
+  border: 2px solid black;
+  border-radius: 20px;
+  line-height: 70px;
+  margin: 10px auto;
+  width: 100%;
+  height: 100%;
+}
+
+#title_sub {
+  color: black;
+  font-family: 'Ubuntu';
+  font-size: 35px;
+  background-color: white;
+  background-color: rgba( 255, 255, 255, 0.7 );
+  border: 2px solid black;
+  border-radius: 20px;
+  line-height: 100px;
+  margin: 10px auto;
+  width: 100%;
+  height: 100px;
+}
+
+#input_code {
+  color: black;
+  font-family: 'Ubuntu';
+  background-color: white;
+  background-color: rgba( 255, 255, 255, 0.5 );
+  border: 2px solid black;
+  border-radius: 20px;
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+}
+
+#server {
+  font-family: 'Ubuntu';
+  background-color: white;
+  background-color: rgba( 255, 255, 255, 0.7 );
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  margin-right: 5px;
+  height: 100%;
+  color: black;
+  text-align: center;
+  float:left;
+}
+
+
+#information {
+  font-family: 'Ubuntu';
+  color: black;
+  background-color: white;
+  background-color: rgba( 255, 255, 255, 0.7 );
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  margin-left: 5px;
+  height: flex;
+  float:right;
+  font-size: 25px;
+}
+
+#server_message {
+  flex-grow: 1;
+  object-fit:cover;
+  resize: none;
+  font-family: Consolas, IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  height: 300px;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+/* page loading animation */
+@keyframes slide_up {
+  from {
+      transform: translateY(-100%); 
+    }
+  
+    to {
+      transform: translateY(0%);
+    }
+}
+
+
+/* large devices */
+@media screen and (min-width: 1200px) {
+
+  #result-panel{
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates 2 columns */
+    grid-template-rows: auto auto; /* Creates 2 rows */
+  }
+  
+
+}
