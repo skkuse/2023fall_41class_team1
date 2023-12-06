@@ -10,7 +10,7 @@ pip install -r requirements.txt
 ```
 3. 서버 실행하기
 ```c
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ## Contributing
