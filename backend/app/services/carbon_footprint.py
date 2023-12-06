@@ -1,5 +1,5 @@
 import pandas as pd
-from constants import KILO, SEC_PER_HOUR
+from constants import KILO, SEC_PER_HOUR, MEMORY_POWER
 
 PUE = 1.67
 PSF = 1.0
@@ -20,7 +20,6 @@ def get_carbon_footprint(java_execution_result, system_info):
     # CPUpower = ???
     # usageCPU_used = ???
     # power_draw_for_cores= TDP_per_core / KILO
-    # power_draw_for_memory=system_info['Available memory'] * MEMORY_POWER / KILO
     # energy_needed = runtime * (power_draw_for_cores * usage+  power_draw_for_memory) * PUE * PSF
 
 
@@ -32,15 +31,21 @@ def get_carbon_footprint(java_execution_result, system_info):
     # CARBON_INTENSITY = 500.0 # 500g? 0.5kg?
 
     # 제 cpu가 목록에 없어서 임의로 넣어놨습니다
-    # processor_name = system_info['Processor name']
-    processor_name = 'Core i5-4460'
+    processor_name = system_info['Processor name']
+    # processor_name = 'Core i5-4460'
     tdp_row = tdp_data.query('index == @processor_name')
+    if tdp_row.empty:
+        processor_name = 'Core i5-4460'
+        tdp_row = tdp_data.query('index == @processor_name')
+
     TDP_cpu = float(tdp_row['in Watt'].values[0])
+
+    power_draw_for_memory=system_info['Available memory'] * MEMORY_POWER / KILO
 
     runtime = java_execution_result['runtime'] / SEC_PER_HOUR
     n_cpu_cores = float(tdp_row['Unnamed: 2'].values[0])
-    power_needed = PUE * n_cpu_cores * TDP_cpu * 1.0
-    energy_needed = runtime * power_needed * PSF / KILO
+    power_needed_cores = PUE * n_cpu_cores * TDP_cpu * 1.0
+    energy_needed = runtime * (power_needed_cores+ power_draw_for_memory) * PSF / KILO
     carbon_footprint = energy_needed * carbon_intensity
     print("footprint : " + str(carbon_footprint))
     return carbon_footprint

@@ -14,7 +14,6 @@ add_middleware(app)
 system_info = get_system_info()
 
 
-
 @app.get("/")
 def test():
   return {"status": 200, "message": "hello from server"}
@@ -24,9 +23,9 @@ def test():
 async def execute_code(payload: JavaCode):
   try:
     java_execution_result = execute_java_code(payload.java_code)
-    if java_execution_result.get('status') == 'Failed':
+    if java_execution_result.get('status') != 'Success':
       return {
-          "status": "Failed",
+          "status": java_execution_result.get('status'),
           "detail": java_execution_result["error"]
       }
 
@@ -40,10 +39,8 @@ async def execute_code(payload: JavaCode):
           "carbon_emission": carbon_emission,
           "carbonEmissionMetrics": carbonEmissionMetrics
       }
-
   except Exception as e:
-    return {"status" : "Failed", "detail":str(e)}
-    # raise HTTPException(status_code=500, detail=str(e))
+    return {"status": "Failed", "detail": str(e)}
 
 
 @app.get("/get_system_info/")
