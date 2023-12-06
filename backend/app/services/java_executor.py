@@ -18,7 +18,6 @@ def compile_java_files(file_names, class_names):
             ['javac', file_name], capture_output=True, text=True)
         print(compile_result)
         if compile_result.returncode != 0:
-            # delete_java_files(file_names, class_names)
             raise SyntaxError(
                 f"Compilation error in {file_name}: {compile_result.stderr}")
 

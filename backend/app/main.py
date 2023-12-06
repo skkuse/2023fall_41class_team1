@@ -7,6 +7,8 @@ from app.services.java_executor import execute_java_code
 from app.services.system_info import get_system_info
 from app.services.carbon_footprint import get_carbon_footprint, emission_converter
 
+import re
+
 app = FastAPI()
 
 add_middleware(app)
@@ -21,6 +23,11 @@ def test():
 
 @app.post("/execute_java_code/")
 async def execute_code(payload: JavaCode):
+  korean_regex = '[\uAC00-\uD7AF]'
+  java_codes = payload.java_code
+  for key in java_codes:
+    java_codes[key]= re.sub(korean_regex, '', java_codes[key])
+
   try:
     java_execution_result = execute_java_code(payload.java_code)
     if java_execution_result.get('status') != 'Success':
