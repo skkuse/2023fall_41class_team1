@@ -1,41 +1,55 @@
-# SWE_Project
+# SWE3002_41 Team Project
 
-### Backend
+* [Frontend](#Frontend)
+  * [Getting Started](#Getting-Started)
+* [Backend](#Backend)
+  * [Getting Started](#Getting-Started)
+---
 
-## Getting Started
-1. 명령 프롬프트(cmd)에서 프로젝트의 /backend 폴더로 이동
-2. 필요한 Python 패키지 설치
-```c
+## Frontend
+
+### Getting Started
+1. Install node.js (Latest LTS Version: 18.18.0, includes npm 9.8.1) https://nodejs.org/ko/download
+2. Move to frontend folder
+```
+cd frontend
+```
+3. Install packages
+```
+npm install
+```
+4. Execute
+```
+npm start 
+```
+
+If you want to install new packages, please use the following command.
+```
+npm install [package name]
+```
+
+---
+    
+## Backend
+
+### Getting Started
+1.  Move to backend folder
+```
+cd backend
+```
+2. Install packages
+```
 pip install -r requirements.txt
 ```
-3. 서버 실행하기
-```c
+3. Execute server
+```
 uvicorn app.main:app --reload
 ```
 
-## Contributing
-새로운 패키지 설치 시, 다음 명령어를 꼭 실행해주세요
-```c
+If you install a new package, use the following command to reflect that package in requirements.txt.
+```
 pip freeze > requirements.txt
 ```
 
-### Frontend
-
-## Getting Started
-1. node.js설치 / 최신 LTS 버전: 18.18.0 (includes npm 9.8.1) https://nodejs.org/ko/download
-2. 명령 프롬프트(cmd)에서 프로젝트의 /frontend 폴더로 이동
-3. 필요한 패키지 설치
-```c
-npm install
-```
-4. 실행하기
-```c
-npm start 
-```
-만약 추가로 설치가 필요한 패키지가 있다면
-```c
-npm install [패키지이름]
-```
-으로 설치해주세요
 
 ## Contributing
