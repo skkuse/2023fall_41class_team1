@@ -1,53 +1,60 @@
 import pandas as pd
-from constants import KILO, SEC_PER_HOUR, MEMORY_POWER
+from constants import KILO, SEC_PER_HOUR, MEMORY_POWER, PUE, PSF, USAGE
 
-PUE = 1.67
-PSF = 1.0
-
-# power_draw_for_cores, usage만 구하면 됨
 def get_carbon_footprint(java_execution_result, system_info):
-    # 계수들 맞는지 확인하기
 
-    # TDP_per_core=tdp_row['Unnamed: 3'].values[0]
-    # TDP_in_watt = float(tdp_row['in Watt'].values[0])
-    #print(tdp_row)
-    #print(tdp_row['in Watt'].values[0])
-    # usage = 1.0 # 뭔지 모르겠음
+    '''
+    carbon footprint = energy needed x carbon intensity
+    energy needed = runtime x (power draw for cores x usage + power draw for memory) x PUE x PSF
 
-    # powerNeeded_CPU = PUE_used * n_CPUcores * CPUpower * usageCPU_used
-    # PUE_used = 1.67
-    # n_CPUcores = ???
-    # CPUpower = ???
-    # usageCPU_used = ???
-    # power_draw_for_cores= TDP_per_core / KILO
-    # energy_needed = runtime * (power_draw_for_cores * usage+  power_draw_for_memory) * PUE * PSF
+    power draw for cores: 
+        computing cores depends on the model and number of cores.
 
+    power draw for memory:
+        size of memroy available.
+
+    usage: 
+        real core usage (default is 1).
+    
+    PUE:
+        Power Usage Effectiveness (constant).
+
+    PSF:
+        Pragmatic Scaling Factor (constant).
+    '''
 
     
     tdp_data = pd.read_csv('./data/TDP_cpu.csv')
     CI_data = pd.read_csv('./data/CI_aggregated.csv')
-    country = system_info['Country']
-    carbon_intensity = float((CI_data.query('index == @country')['in gCO2e/kWh']).values[0])
-    # CARBON_INTENSITY = 500.0 # 500g? 0.5kg?
 
-    # 제 cpu가 목록에 없어서 임의로 넣어놨습니다
+    # h
+    runtime = java_execution_result['runtime'] / SEC_PER_HOUR
+
     processor_name = system_info['Processor name']
-    # processor_name = 'Core i5-4460'
     tdp_row = tdp_data.query('index == @processor_name')
     if tdp_row.empty:
         processor_name = 'Core i5-4460'
         tdp_row = tdp_data.query('index == @processor_name')
-
-    TDP_cpu = float(tdp_row['in Watt'].values[0])
-
-    power_draw_for_memory=system_info['Available memory'] * MEMORY_POWER / KILO
-
-    runtime = java_execution_result['runtime'] / SEC_PER_HOUR
+    
+    tdp_cpu = float(tdp_row['in Watt'].values[0])
     n_cpu_cores = float(tdp_row['Unnamed: 2'].values[0])
-    power_needed_cores = PUE * n_cpu_cores * TDP_cpu * 1.0
-    energy_needed = runtime * (power_needed_cores+ power_draw_for_memory) * PSF / KILO
+
+    # W
+    power_needed_cores = n_cpu_cores * tdp_cpu
+
+    # GB * W/GB = W
+    power_draw_for_memory = system_info['Available memory'] * MEMORY_POWER
+
+    # gCO2/kWh
+    country = system_info['Country']
+    carbon_intensity = float((CI_data.query('index == @country')['in gCO2e/kWh']).values[0])
+
+    # kWh
+    energy_needed = runtime * (power_needed_cores * USAGE + power_draw_for_memory) * PUE * PSF / KILO
+    # kWh * gCO2/kWh
     carbon_footprint = energy_needed * carbon_intensity
-    print("footprint : " + str(carbon_footprint))
+    
+    # gCO2
     return carbon_footprint
 
 
