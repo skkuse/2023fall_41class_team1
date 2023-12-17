@@ -209,24 +209,24 @@ function App() {
                 title="Total CPU cores (including logical)"
                 content={
                   serverInfo
-                    ? serverInfo["Total CPU cores (including logical)"]
+                    ? serverInfo["Total_CPU_cores_including_logical"]
                     : "-"
                 }
               ></GridCell>
               <GridCell
                 title="Physical CPU cores"
-                content={serverInfo ? serverInfo["Physical CPU cores"] : "-"}
+                content={serverInfo ? serverInfo["Physical_CPU_cores"] : "-"}
               ></GridCell>
               <GridCell
                 title="Maximum CPU frequency"
-                content={serverInfo ? serverInfo["Maximum CPU frequency"] : "-"}
+                content={serverInfo ? serverInfo["Maximum_CPU_frequency"] : "-"}
                 unit="MHz"
               ></GridCell>
               <GridCell
                 title="Total memory"
                 content={
                   serverInfo
-                    ? parseFloat(serverInfo["Total memory"]).toFixed(2)
+                    ? parseFloat(serverInfo["Total_memory"]).toFixed(2)
                     : "-"
                 }
                 unit="GiB"
@@ -235,7 +235,7 @@ function App() {
                 title="Available memory"
                 content={
                   serverInfo
-                    ? parseFloat(serverInfo["Available memory"]).toFixed(2)
+                    ? parseFloat(serverInfo["Available_memory"]).toFixed(2)
                     : "-"
                 }
                 unit="GiB"

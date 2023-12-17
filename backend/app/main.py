@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from app.middleware_config import add_middleware
 
-from app.models.java_code import JavaCode
+from app.models.java_code import JavaCode, SuccessResponseModel, ErrorResponseModel
+from app.models.system_model import SystemInfo
 
 from app.services.java_executor import execute_java_code
 from app.services.system_info import get_system_info
 from app.services.carbon_footprint import get_carbon_footprint, emission_converter
 
+from typing import Union
 import re
 
 app = FastAPI()
@@ -21,7 +23,7 @@ def test():
   return {"status": 200, "message": "hello from server"}
 
 
-@app.post("/execute_java_code/")
+@app.post("/execute_java_code/", response_model=Union[SuccessResponseModel, ErrorResponseModel])
 async def execute_code(payload: JavaCode):
 
   try:
@@ -46,6 +48,6 @@ async def execute_code(payload: JavaCode):
     return {"status": "Failed", "detail": str(e)}
 
 
-@app.get("/get_system_info/")
+@app.get("/get_system_info/", response_model=SystemInfo)
 async def get_system_info():
   return system_info

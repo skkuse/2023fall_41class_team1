@@ -30,7 +30,7 @@ def get_carbon_footprint(java_execution_result, system_info):
     # h
     runtime = java_execution_result['runtime'] / SEC_PER_HOUR
 
-    processor_name = system_info['Processor name']
+    processor_name = system_info['Processor_name']
     tdp_row = tdp_data.query('index == @processor_name')
     if tdp_row.empty:
         processor_name = 'Core i5-4460'
@@ -43,7 +43,7 @@ def get_carbon_footprint(java_execution_result, system_info):
     power_needed_cores = n_cpu_cores * tdp_cpu
 
     # GB * W/GB = W
-    power_draw_for_memory = system_info['Available memory'] * MEMORY_POWER
+    power_draw_for_memory = system_info['Available_memory'] * MEMORY_POWER
 
     # gCO2/kWh
     country = system_info['Country']
