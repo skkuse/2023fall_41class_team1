@@ -16,8 +16,9 @@ def compile_java_files(file_names, class_names):
     for file_name in file_names:
         compile_result = subprocess.run(
             ['javac', '-encoding', 'UTF-8', file_name], capture_output=True, text=True)
-        print(compile_result)
         if compile_result.returncode != 0:
+            print("compile_result")
+            print(compile_result)
             raise SyntaxError(
                 f"Compilation error in {file_name}: {compile_result.stderr}")
 
@@ -52,8 +53,8 @@ def execute_java_code(java_codes: dict):
         delete_java_files(file_names, class_names)
         ret = {"status": "TimeoutFailed", "error": "Execution time exceeded the limit"}
     except SyntaxError as e:
-        delete_java_files(file_names, class_names)
-        ret = {"status": "Failed", "error": str(e)}
+        # delete_java_files(file_names, class_names)
+        ret = {"status": "CompileFailed", "error": str(e)}
     except FileNotFoundError as e:
         ret = {"status": "Failed", "error": str(e)}
             

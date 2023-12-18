@@ -70,7 +70,8 @@ function App() {
         case "Success":
           setExecutionResult(result);
           break;
-        case "Failed":
+        case "CompileFailed":
+          console.log("CompileFailed")
           alert(
             `컴파일 중 오류가 발생했습니다. 코드를 다시 입력해주세요.\n에러 메시지: ${result.detail}`
           );
