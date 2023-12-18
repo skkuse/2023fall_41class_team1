@@ -46,10 +46,8 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+### Contributing
 If you install a new package, use the following command to reflect that package in requirements.txt.
 ```
 pip freeze > requirements.txt
 ```
-
-
-## Contributing
