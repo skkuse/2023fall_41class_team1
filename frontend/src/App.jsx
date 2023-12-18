@@ -210,13 +210,13 @@ function App() {
                 title="Total CPU cores (including logical)"
                 content={
                   serverInfo
-                    ? serverInfo["Total_CPU_cores_including_logical"]
+                    ? parseInt(serverInfo["Total_CPU_cores_including_logical"])
                     : "-"
                 }
               ></GridCell>
               <GridCell
                 title="Physical CPU cores"
-                content={serverInfo ? serverInfo["Physical_CPU_cores"] : "-"}
+                content={serverInfo ? parseInt(serverInfo["Physical_CPU_cores"]) : "-"}
               ></GridCell>
               <GridCell
                 title="Maximum CPU frequency"
