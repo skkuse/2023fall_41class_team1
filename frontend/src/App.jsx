@@ -131,7 +131,7 @@ function App() {
                   content={parseFloat(
                     executionResult["carbon_emission"]
                   ).toFixed(6)}
-                  unit="gCO2"
+                  unit="g CO2e"
                 ></GridCell>
               </GridRow>
               <GridRow>

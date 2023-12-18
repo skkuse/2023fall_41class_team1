@@ -45,7 +45,7 @@ function GridCell(props) {
           }}
           {...other}
         >
-          {props.content} {props.unit === 'gCO2' ? <span>gCO<sup>2</sup></span> : <span>{props.unit}</span>}
+          {props.content} {props.unit === 'g CO2e' ? <span>g CO<sup>2</sup>e</span> : <span>{props.unit}</span>}
         </Box>
       </div>
     </div>
